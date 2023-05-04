@@ -1,0 +1,510 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cryville.Input</name>
+    </assembly>
+    <members>
+        <member name="T:Cryville.Input.InputEvent">
+            <summary>
+            Input event.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputEvent.Identifier">
+            <summary>
+            The identifier.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputEvent.From">
+            <summary>
+            The input frame last received.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputEvent.To">
+            <summary>
+            The new input frame received.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.InputEvent.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.InputFrameHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:Cryville.Input.InputHandler.OnInput" /> event.
+            </summary>
+            <param name="identifier">The identifier of <paramref name="vector" />.</param>
+            <param name="vector">The new input frame.</param>
+        </member>
+        <member name="T:Cryville.Input.InputHandler">
+            <summary>
+            Input handler.
+            </summary>
+        </member>
+        <member name="E:Cryville.Input.InputHandler.OnInput">
+            <summary>
+            Occurs when a new input frame is sent.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.InputHandler.Finalize">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputHandler.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputHandler.Activate">
+            <summary>
+            Activates the input handler and starts receiving new input frames.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.InputHandler.Deactivate">
+            <summary>
+            Deactivates the input handler and stops receiving new input frames.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.InputHandler.Dispose(System.Boolean)">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <param name="disposing">Whether disposing or finalizing.</param>
+        </member>
+        <member name="P:Cryville.Input.InputHandler.IsNullable">
+            <summary>
+            Whether null input frames may be sent by the input handler.
+            </summary>
+            <remarks>
+            <para>See <see cref="P:Cryville.Input.InputFrame.IsNull" /> for more information.</para>
+            </remarks>
+        </member>
+        <member name="P:Cryville.Input.InputHandler.Dimension">
+            <summary>
+            The dimension of the vectors sent by the input handler.
+            </summary>
+            <remarks>
+            <para>Dimension must be an integer from 0 (inclusive) to 4 (inclusive.) The components of the <see cref="T:Cryville.Input.InputVector" /> whose indices are beyond the dimension should be set to 0.</para>
+            </remarks>
+        </member>
+        <member name="P:Cryville.Input.InputHandler.ReferenceCue">
+            <summary>
+            The reference cue for the vectors sent by the input handler.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.InputHandler.GetTypeName(System.Int32)">
+            <summary>
+            Gets the friendly name of the specified type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The friendly name of the specified type.</returns>
+            <remarks>
+            <para>See <see cref="P:Cryville.Input.InputSource.Type"/> for more information.</para>
+            </remarks>
+        </member>
+        <member name="M:Cryville.Input.InputHandler.GetCurrentTimestamp">
+            <summary>
+            Gets the current timestamp of the input handler.
+            </summary>
+            <returns>The current timestamp of the input handler in seconds.</returns>
+        </member>
+        <member name="M:Cryville.Input.InputHandler.Feed(System.Int32,System.Int32,Cryville.Input.InputFrame)">
+            <summary>
+            Sends a new input frame.
+            </summary>
+            <param name="type">The type of the input frame.</param>
+            <param name="identifier">The ID of the input frame.</param>
+            <param name="frame">The input frame.</param>
+        </member>
+        <member name="T:Cryville.Input.InputIdentifier">
+            <summary>
+            Input identifier.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputIdentifier.Source">
+            <summary>
+            The input source.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputIdentifier.Id">
+            <summary>
+            The input ID.
+            </summary>
+            <remarks>
+            <para>This property is used to distinguish different inputs on the input source. For example, a touch screen that supports simultaneous touches may assign unique IDs to each finger.</para>
+            </remarks>
+        </member>
+        <member name="M:Cryville.Input.InputIdentifier.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputIdentifier.Equals(Cryville.Input.InputIdentifier)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputIdentifier.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputIdentifier.ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputIdentifier.op_Equality(Cryville.Input.InputIdentifier,Cryville.Input.InputIdentifier)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputIdentifier.op_Inequality(Cryville.Input.InputIdentifier,Cryville.Input.InputIdentifier)">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.InputManager">
+            <summary>
+            Input manager.
+            </summary>
+        </member>
+        <member name="F:Cryville.Input.InputManager.HandlerRegistries">
+            <summary>
+            A set of handler types to be initialized.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.InputManager.#ctor">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.InputManager" /> class and tries to initialize all the handlers in <see cref="F:Cryville.Input.InputManager.HandlerRegistries" />.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.InputManager.GetHandlerByTypeName(System.String)">
+            <summary>
+            Gets the handler with the specified type name.
+            </summary>
+            <param name="typeName">The type name.</param>
+            <returns>The handler with the specified type name. <see langword="null" /> if not found or not initialized.</returns>
+        </member>
+        <member name="M:Cryville.Input.InputManager.EnumerateHandlers(System.Action{Cryville.Input.InputHandler})">
+            <summary>
+            Enumerates all initialized handlers and passes each of them into a callback function.
+            </summary>
+            <param name="cb">The callback function.</param>
+        </member>
+        <member name="T:Cryville.Input.InputSource">
+            <summary>
+            Input source.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputSource.Handler">
+            <summary>
+            The input handler.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputSource.Type">
+            <summary>
+            The type of the input source as an identifier of a component of the input handler.
+            </summary>
+            <remarks>
+            <para>This property is used to distinguish different components of the input handler. For example, each key on the keyboard is assigned a unique type number. Use <see cref="M:Cryville.Input.InputHandler.GetTypeName(System.Int32)" /> to get a friendly name of a specific type.</para>
+            </remarks>
+        </member>
+        <member name="M:Cryville.Input.InputSource.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputSource.Equals(Cryville.Input.InputSource)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputSource.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputSource.ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputSource.op_Equality(Cryville.Input.InputSource,Cryville.Input.InputSource)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputSource.op_Inequality(Cryville.Input.InputSource,Cryville.Input.InputSource)">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.InputFrame">
+            <summary>
+            Input frame.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputFrame.Time">
+            <summary>
+            The timestamp in seconds.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputFrame.IsNull">
+            <summary>
+            Whether the vector is null.
+            </summary>
+            <remarks>
+            <para>An input frame with this property set to <see langword="true" /> marks the end of life of an input ID (see <see cref="P:Cryville.Input.InputIdentifier.Id" />.) This usually occurs when, for example, the button of the device is released.</para>
+            <para>When this property is set to <see langword="true" />, all the components of the vector is meaningless and should be set to 0.</para>
+            </remarks>
+        </member>
+        <member name="P:Cryville.Input.InputFrame.Vector">
+            <summary>
+            The input vector.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.InputFrame.#ctor(System.Double)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.InputFrame" /> struct with <see cref="P:Cryville.Input.InputFrame.IsNull" /> set to <see langword="true" />.
+            </summary>
+            <param name="time">The timestamp in seconds.</param>
+        </member>
+        <member name="M:Cryville.Input.InputFrame.#ctor(System.Double,Cryville.Input.InputVector)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.InputFrame" /> struct.
+            </summary>
+            <param name="time">The timestamp in seconds.</param>
+            <param name="vector">The input vector.</param>
+        </member>
+        <member name="M:Cryville.Input.InputFrame.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.InputVector">
+            <summary>
+            Input vector.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputVector.X">
+            <summary>
+            The first component of the vector.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputVector.Y">
+            <summary>
+            The second component of the vector.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputVector.Z">
+            <summary>
+            The third component of the vector.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.InputVector.W">
+            <summary>
+            The fourth component of the vector.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.InputVector.#ctor(System.Single)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.InputVector" /> struct of one dimension.
+            </summary>
+            <param name="x">The first component of the vector.</param>
+        </member>
+        <member name="M:Cryville.Input.InputVector.#ctor(System.Single,System.Single)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.InputVector" /> struct of two dimensions.
+            </summary>
+            <param name="x">The first component of the vector.</param>
+            <param name="y">The second component of the vector.</param>
+        </member>
+        <member name="M:Cryville.Input.InputVector.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.InputVector" /> struct of three dimensions.
+            </summary>
+            <param name="x">The first component of the vector.</param>
+            <param name="y">The second component of the vector.</param>
+            <param name="z">The third component of the vector.</param>
+        </member>
+        <member name="M:Cryville.Input.InputVector.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.InputVector" /> struct of four dimensions.
+            </summary>
+            <param name="x">The first component of the vector.</param>
+            <param name="y">The second component of the vector.</param>
+            <param name="z">The third component of the vector.</param>
+            <param name="w">The fourth component of the vector.</param>
+        </member>
+        <member name="M:Cryville.Input.InputVector.op_Addition(Cryville.Input.InputVector,Cryville.Input.InputVector)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputVector.op_Subtraction(Cryville.Input.InputVector,Cryville.Input.InputVector)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputVector.op_Multiply(System.Single,Cryville.Input.InputVector)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputVector.op_UnaryNegation(Cryville.Input.InputVector)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.InputVector.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.ReferenceCue">
+            <summary>
+            Provides cues about the frame of reference.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.ReferenceCue.PhysicalDimension">
+            <summary>
+            The physical dimension.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.ReferenceCue.RelativeUnit">
+            <summary>
+            The additional relative unit.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.ReferenceCue.Flags">
+            <summary>
+            The reference flags.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.ReferenceCue.Origin">
+            <summary>
+            The origin.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.ReferenceCue.Pivot">
+            <summary>
+            The pivot.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.ReferenceCue.Transform(Cryville.Input.InputFrame)">
+            <summary>
+            Transforms a frame into the reference by applying the offset specified by <see cref="P:Cryville.Input.ReferenceCue.Origin" />.
+            </summary>
+            <param name="frame">The input frame.</param>
+            <returns>The transformed input frame.</returns>
+        </member>
+        <member name="M:Cryville.Input.ReferenceCue.InverseTransform(Cryville.Input.InputFrame)">
+            <summary>
+            Transforms a frame out of the reference by removing the offset specified by <see cref="P:Cryville.Input.ReferenceCue.Origin" />.
+            </summary>
+            <param name="frame">The input frame.</param>
+            <returns>The transformed input frame.</returns>
+        </member>
+        <member name="M:Cryville.Input.ReferenceCue.Transform(Cryville.Input.InputFrame,Cryville.Input.InputVector)">
+            <summary>
+            Transforms a frame into the reference by applying the offset specified by <see cref="P:Cryville.Input.ReferenceCue.Origin" /> and <see cref="P:Cryville.Input.ReferenceCue.Pivot" />.
+            </summary>
+            <param name="frame">The input frame.</param>
+            <param name="universe">The universe size.</param>
+            <returns>The transformed input frame.</returns>
+        </member>
+        <member name="M:Cryville.Input.ReferenceCue.InverseTransform(Cryville.Input.InputFrame,Cryville.Input.InputVector)">
+            <summary>
+            Transforms a frame out of the reference by removing the offset specified by <see cref="P:Cryville.Input.ReferenceCue.Origin" /> and <see cref="P:Cryville.Input.ReferenceCue.Pivot" />.
+            </summary>
+            <param name="frame">The input frame.</param>
+            <param name="universe">The universe size.</param>
+            <returns>The transformed input frame.</returns>
+        </member>
+        <member name="T:Cryville.Input.PhysicalDimension">
+            <summary>
+            Physical dimension.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.PhysicalDimension.Time">
+            <summary>
+            The dimensions of time.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.PhysicalDimension.Length">
+            <summary>
+            The dimensions of length.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.PhysicalDimension.Mass">
+            <summary>
+            The dimensions of mass.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.PhysicalDimension.ElectricCurrent">
+            <summary>
+            The dimensions of electric current.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.PhysicalDimension.ThermodynamicTemperature">
+            <summary>
+            The dimensions of thermodynamic temperature.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.PhysicalDimension.AmountOfSubstance">
+            <summary>
+            The dimensions of amount of substance.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.PhysicalDimension.LuminousIntensity">
+            <summary>
+            The dimensions of luminous intensity.
+            </summary>
+        </member>
+        <member name="T:Cryville.Input.RelativeUnit">
+            <summary>
+            Relative unit.
+            </summary>
+        </member>
+        <member name="F:Cryville.Input.RelativeUnit.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:Cryville.Input.RelativeUnit.Pixel">
+            <summary>
+            Pixel.
+            </summary>
+        </member>
+        <member name="T:Cryville.Input.ReferenceFlag">
+            <summary>
+            Reference flag.
+            </summary>
+        </member>
+        <member name="F:Cryville.Input.ReferenceFlag.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:Cryville.Input.ReferenceFlag.FlipX">
+            <summary>
+            The X axis is flipped.
+            </summary>
+        </member>
+        <member name="F:Cryville.Input.ReferenceFlag.FlipY">
+            <summary>
+            The Y axis is flipped.
+            </summary>
+        </member>
+        <member name="F:Cryville.Input.ReferenceFlag.FlipZ">
+            <summary>
+            The Z axis is flipped.
+            </summary>
+        </member>
+        <member name="F:Cryville.Input.ReferenceFlag.FlipW">
+            <summary>
+            The W axis is flipped.
+            </summary>
+        </member>
+        <member name="T:Cryville.Input.SimpleInputConsumer">
+            <summary>
+            A simple input consumer that receives input frames.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.SimpleInputConsumer.#ctor(Cryville.Input.InputManager)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.SimpleInputConsumer" /> class.
+            </summary>
+            <param name="manager">The input consumer.</param>
+        </member>
+        <member name="M:Cryville.Input.SimpleInputConsumer.Activate">
+            <summary>
+            Activates all the input handlers.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.SimpleInputConsumer.Deactivate">
+            <summary>
+            Deactivates all the input handlers.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.SimpleInputConsumer.OnInput(Cryville.Input.InputIdentifier,Cryville.Input.InputFrame)">
+            <summary>
+            Called when a new input frame is received.
+            </summary>
+            <param name="identifier">The input identifier.</param>
+            <param name="frame">The new input frame.</param>
+        </member>
+        <member name="M:Cryville.Input.SimpleInputConsumer.EnumerateEvents(System.Action{Cryville.Input.InputEvent})">
+            <summary>
+            Enumerates all the input events in the queue, passes each of them into the given callback function, and then flushes the queue.
+            </summary>
+            <param name="cb">The callback function.</param>
+        </member>
+        <member name="M:Cryville.Input.SimpleInputConsumer.EnumerateActiveIdentifiers(System.Action{Cryville.Input.InputIdentifier,Cryville.Input.InputFrame})">
+            <summary>
+            Enumerates all the active identifiers and passes each of them into the given callback function with its current frame.
+            </summary>
+            <param name="cb">The callback function.</param>
+        </member>
+    </members>
+</doc>

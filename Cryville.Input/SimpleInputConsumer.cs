@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+
+namespace Cryville.Input {
+	/// <summary>
+	/// A simple input consumer that receives input frames.
+	/// </summary>
+	public class SimpleInputConsumer {
+		readonly InputManager _manager;
+		readonly object _lock = new object();
+		readonly Dictionary<InputIdentifier, InputFrame> _frames = new Dictionary<InputIdentifier, InputFrame>();
+		readonly List<InputEvent> _events = new List<InputEvent>();
+		/// <summary>
+		/// Creates an instance of the <see cref="SimpleInputConsumer" /> class.
+		/// </summary>
+		/// <param name="manager">The input consumer.</param>
+		public SimpleInputConsumer(InputManager manager) { _manager = manager; }
+		/// <summary>
+		/// Activates all the input handlers.
+		/// </summary>
+		public void Activate() {
+			lock (_lock) {
+				_events.Clear();
+			}
+			_manager.EnumerateHandlers(h => h.OnInput += OnInput);
+		}
+		/// <summary>
+		/// Deactivates all the input handlers.
+		/// </summary>
+		public void Deactivate() {
+			_manager.EnumerateHandlers(h => h.OnInput -= OnInput);
+		}
+		/// <summary>
+		/// Called when a new input frame is received.
+		/// </summary>
+		/// <param name="identifier">The input identifier.</param>
+		/// <param name="frame">The new input frame.</param>
+		protected void OnInput(InputIdentifier identifier, InputFrame frame) {
+			lock (_lock) {
+				if (_frames.TryGetValue(identifier, out InputFrame frame0)) {
+					_events.Add(new InputEvent {
+						Identifier = identifier,
+						From = frame0,
+						To = frame,
+					});
+					if (frame.IsNull) _frames.Remove(identifier);
+					else _frames[identifier] = frame;
+				}
+				else {
+					_events.Add(new InputEvent {
+						Identifier = identifier,
+						From = new InputFrame(frame.Time),
+						To = frame,
+					});
+					_frames.Add(identifier, frame);
+				}
+			}
+		}
+		/// <summary>
+		/// Enumerates all the input events in the queue, passes each of them into the given callback function, and then flushes the queue.
+		/// </summary>
+		/// <param name="cb">The callback function.</param>
+		public void EnumerateEvents(Action<InputEvent> cb) {
+			lock (_lock) {
+				foreach (var ev in _events) cb(ev);
+				_events.Clear();
+			}
+		}
+		/// <summary>
+		/// Enumerates all the active identifiers and passes each of them into the given callback function with its current frame.
+		/// </summary>
+		/// <param name="cb">The callback function.</param>
+		public void EnumerateActiveIdentifiers(Action<InputIdentifier, InputFrame> cb) {
+			lock (_lock) {
+				foreach (var vec in _frames) cb(vec.Key, vec.Value);
+			}
+		}
+	}
+}
