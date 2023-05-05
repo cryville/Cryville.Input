@@ -31,8 +31,8 @@
             <summary>
             Represents the method that will handle the <see cref="E:Cryville.Input.InputHandler.OnInput" /> event.
             </summary>
-            <param name="identifier">The input identifier of <paramref name="vector" />.</param>
-            <param name="vector">The new input frame.</param>
+            <param name="identifier">The input identifier of <paramref name="frame" />.</param>
+            <param name="frame">The new input frame.</param>
         </member>
         <member name="T:Cryville.Input.InputHandler">
             <summary>

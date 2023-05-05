@@ -4,9 +4,9 @@ namespace Cryville.Input {
 	/// <summary>
 	/// Represents the method that will handle the <see cref="InputHandler.OnInput" /> event.
 	/// </summary>
-	/// <param name="identifier">The input identifier of <paramref name="vector" />.</param>
-	/// <param name="vector">The new input frame.</param>
-	public delegate void InputFrameHandler(InputIdentifier identifier, InputFrame vector);
+	/// <param name="identifier">The input identifier of <paramref name="frame" />.</param>
+	/// <param name="frame">The new input frame.</param>
+	public delegate void InputFrameHandler(InputIdentifier identifier, InputFrame frame);
 	/// <summary>
 	/// Input handler.
 	/// </summary>

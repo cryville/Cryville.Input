@@ -32,9 +32,9 @@
 				表示处理 <see cref="E:Cryville.Input.InputHandler.OnInput" /> 事件的方法。
 			</summary>
 			<param name="identifier">
-				<paramref name="vector" /> 的输入标识。
+				<paramref name="frame" /> 的输入标识。
 			</param>
-			<param name="vector">新的输入帧。</param>
+			<param name="frame">新的输入帧。</param>
 		</member>
 		<member name="T:Cryville.Input.InputHandler">
 			<summary>
