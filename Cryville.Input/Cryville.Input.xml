@@ -11,7 +11,7 @@
         </member>
         <member name="P:Cryville.Input.InputEvent.Identifier">
             <summary>
-            The identifier.
+            The input identifier.
             </summary>
         </member>
         <member name="P:Cryville.Input.InputEvent.From">
@@ -31,7 +31,7 @@
             <summary>
             Represents the method that will handle the <see cref="E:Cryville.Input.InputHandler.OnInput" /> event.
             </summary>
-            <param name="identifier">The identifier of <paramref name="vector" />.</param>
+            <param name="identifier">The input identifier of <paramref name="vector" />.</param>
             <param name="vector">The new input frame.</param>
         </member>
         <member name="T:Cryville.Input.InputHandler">
@@ -111,7 +111,7 @@
             Sends a new input frame.
             </summary>
             <param name="type">The type of the input frame.</param>
-            <param name="identifier">The ID of the input frame.</param>
+            <param name="id">The ID of the input frame.</param>
             <param name="frame">The input frame.</param>
         </member>
         <member name="T:Cryville.Input.InputIdentifier">
@@ -129,7 +129,7 @@
             The input ID.
             </summary>
             <remarks>
-            <para>This property is used to distinguish different inputs on the input source. For example, a touch screen that supports simultaneous touches may assign unique IDs to each finger.</para>
+            <para>This property is used to distinguish different inputs on the input source. For example, a touch screen that supports simultaneous touches may assign a unique ID to each finger.</para>
             </remarks>
         </member>
         <member name="M:Cryville.Input.InputIdentifier.Equals(System.Object)">

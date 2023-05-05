@@ -4,7 +4,7 @@ namespace Cryville.Input {
 	/// <summary>
 	/// Represents the method that will handle the <see cref="InputHandler.OnInput" /> event.
 	/// </summary>
-	/// <param name="identifier">The identifier of <paramref name="vector" />.</param>
+	/// <param name="identifier">The input identifier of <paramref name="vector" />.</param>
 	/// <param name="vector">The new input frame.</param>
 	public delegate void InputFrameHandler(InputIdentifier identifier, InputFrame vector);
 	/// <summary>
@@ -90,10 +90,10 @@ namespace Cryville.Input {
 		/// Sends a new input frame.
 		/// </summary>
 		/// <param name="type">The type of the input frame.</param>
-		/// <param name="identifier">The ID of the input frame.</param>
+		/// <param name="id">The ID of the input frame.</param>
 		/// <param name="frame">The input frame.</param>
-		protected void Feed(int type, int identifier, InputFrame frame) {
-			m_onInput?.Invoke(new InputIdentifier { Source = new InputSource { Handler = this, Type = type }, Id = identifier }, frame);
+		protected void Feed(int type, int id, InputFrame frame) {
+			m_onInput?.Invoke(new InputIdentifier { Source = new InputSource { Handler = this, Type = type }, Id = id }, frame);
 		}
 	}
 }

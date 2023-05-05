@@ -1,0 +1,531 @@
+<?xml version="1.0"?>
+<doc>
+	<assembly>
+		<name>Cryville.Input</name>
+	</assembly>
+	<members>
+		<member name="T:Cryville.Input.InputEvent">
+			<summary>
+				输入事件。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputEvent.Identifier">
+			<summary>
+				输入标识。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputEvent.From">
+			<summary>
+				上一次接收到的输入帧。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputEvent.To">
+			<summary>
+				新接收到的输入帧。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.InputEvent.ToString">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.InputFrameHandler">
+			<summary>
+				表示处理 <see cref="E:Cryville.Input.InputHandler.OnInput" /> 事件的方法。
+			</summary>
+			<param name="identifier">
+				<paramref name="vector" /> 的输入标识。
+			</param>
+			<param name="vector">新的输入帧。</param>
+		</member>
+		<member name="T:Cryville.Input.InputHandler">
+			<summary>
+				输入处理器。
+			</summary>
+		</member>
+		<member name="E:Cryville.Input.InputHandler.OnInput">
+			<summary>
+				在新的输入帧被发送时发生。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.InputHandler.Finalize">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputHandler.Dispose">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputHandler.Activate">
+			<summary>
+				激活该输入处理器并开始接收新的输入帧。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.InputHandler.Deactivate">
+			<summary>
+				反激活该输入处理器并停止接收新的输入帧。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.InputHandler.Dispose(System.Boolean)">
+			<summary>
+				执行与释放或重置非托管资源关联的应用程序定义的任务。
+			</summary>
+			<param name="disposing">正在被释放还是被析构。</param>
+		</member>
+		<member name="P:Cryville.Input.InputHandler.IsNullable">
+			<summary>
+				该输入处理器是否会发送空输入帧。
+			</summary>
+			<remarks>
+				<para>
+					详细信息参见 <see cref="P:Cryville.Input.InputFrame.IsNull" />。
+				</para>
+			</remarks>
+		</member>
+		<member name="P:Cryville.Input.InputHandler.Dimension">
+			<summary>
+				该输入处理器发送的向量的维度数。
+			</summary>
+			<remarks>
+				<para>
+					维度数必须是 0（含）到 4（含）之间的整数。<see cref="T:Cryville.Input.InputVector" /> 中超过维度数的分量应当被设置为 0。
+				</para>
+			</remarks>
+		</member>
+		<member name="P:Cryville.Input.InputHandler.ReferenceCue">
+			<summary>
+				该输入处理器所发送的向量的参考。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.InputHandler.GetTypeName(System.Int32)">
+			<summary>
+				获取指定类型的通俗名称。
+			</summary>
+			<param name="type">类型。</param>
+			<returns>指定类型的通俗名称。</returns>
+			<remarks>
+				<para>
+					详细信息参见 <see cref="P:Cryville.Input.InputSource.Type"/>。
+				</para>
+			</remarks>
+		</member>
+		<member name="M:Cryville.Input.InputHandler.GetCurrentTimestamp">
+			<summary>
+				获取该输入处理器的当前时间戳。
+			</summary>
+			<returns>该输入处理器的当前时间戳（秒）。</returns>
+			<remarks>
+				<para>
+					可能的情况下，该方法返回的时间戳与该输入处理器发送的输入帧的 <see cref="P:Cryville.Input.InputFrame.Time" /> 来源相同。但是，不保证调用该方法时，所有 <see cref="P:Cryville.Input.InputFrame.Time" /> 小于该方法返回的时间戳的输入帧已经全部被发送。
+				</para>
+			</remarks>
+		</member>
+		<member name="M:Cryville.Input.InputHandler.Feed(System.Int32,System.Int32,Cryville.Input.InputFrame)">
+			<summary>
+				发送一个新的输入帧。
+			</summary>
+			<param name="type">输入帧的类型。</param>
+			<param name="id">输入帧的 ID。</param>
+			<param name="frame">输入帧。</param>
+		</member>
+		<member name="T:Cryville.Input.InputIdentifier">
+			<summary>
+				输入标识。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputIdentifier.Source">
+			<summary>
+				输入源。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputIdentifier.Id">
+			<summary>
+				输入 ID。
+			</summary>
+			<remarks>
+				<para>该属性用于区分同一输入源上的不同输入。例如，支持多指触控的触摸屏会给每只手指分配一个独有的 ID。</para>
+			</remarks>
+		</member>
+		<member name="M:Cryville.Input.InputIdentifier.Equals(System.Object)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputIdentifier.Equals(Cryville.Input.InputIdentifier)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputIdentifier.GetHashCode">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputIdentifier.ToString">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputIdentifier.op_Equality(Cryville.Input.InputIdentifier,Cryville.Input.InputIdentifier)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputIdentifier.op_Inequality(Cryville.Input.InputIdentifier,Cryville.Input.InputIdentifier)">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.InputManager">
+			<summary>
+				输入管理器。
+			</summary>
+		</member>
+		<member name="F:Cryville.Input.InputManager.HandlerRegistries">
+			<summary>
+				要初始化的处理器类型的集合。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.InputManager.#ctor">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.InputManager" /> 类的实例，并尝试初始化 <see cref="F:Cryville.Input.InputManager.HandlerRegistries" /> 中的所有处理器。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.InputManager.GetHandlerByTypeName(System.String)">
+			<summary>
+				获取指定类型名称的处理器。
+			</summary>
+			<param name="typeName">The type name.</param>
+			<returns>
+				指定类型名称的处理器。如果没有找到或者没有初始化则返回 <see langword="null" />。
+			</returns>
+		</member>
+		<member name="M:Cryville.Input.InputManager.EnumerateHandlers(System.Action{Cryville.Input.InputHandler})">
+			<summary>
+				枚举所有已初始化的处理器，依次传入一个回调函数。
+			</summary>
+			<param name="cb">回调函数。</param>
+		</member>
+		<member name="T:Cryville.Input.InputSource">
+			<summary>
+				输入源。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputSource.Handler">
+			<summary>
+				输入处理器。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputSource.Type">
+			<summary>
+				该输入源的类型，用作输入源上组件的标识。
+			</summary>
+			<remarks>
+				<para>
+					该属性用于区分输入处理器上的不同组件。例如，键盘上的每一个键都被分配了一个类型数字。使用 <see cref="M:Cryville.Input.InputHandler.GetTypeName(System.Int32)" /> 可以获取指定类型的通俗名称。
+				</para>
+			</remarks>
+		</member>
+		<member name="M:Cryville.Input.InputSource.Equals(System.Object)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputSource.Equals(Cryville.Input.InputSource)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputSource.GetHashCode">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputSource.ToString">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputSource.op_Equality(Cryville.Input.InputSource,Cryville.Input.InputSource)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputSource.op_Inequality(Cryville.Input.InputSource,Cryville.Input.InputSource)">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.InputFrame">
+			<summary>
+				输入帧。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputFrame.Time">
+			<summary>
+				时间戳（秒）。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputFrame.IsNull">
+			<summary>
+				向量是否为空。
+			</summary>
+			<remarks>
+				<para>
+					该属性为 <see langword="true" /> 的输入帧表示一个输入 ID（参见 <see cref="P:Cryville.Input.InputIdentifier.Id" />）结束，常在如设备上的按键被松开等情况下发生。
+				</para>
+				<para>
+					该属性为 <see langword="true" /> 时，<see cref="P:Cryville.Input.InputFrame.Vector" /> 的所有分量均无意义且应当被设为 0。
+				</para>
+			</remarks>
+		</member>
+		<member name="P:Cryville.Input.InputFrame.Vector">
+			<summary>
+				输入向量。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.InputFrame.#ctor(System.Double)">
+			<summary>
+				创建一个 <see cref="P:Cryville.Input.InputFrame.IsNull" /> 为 <see langword="true" /> 的 <see cref="T:Cryville.Input.InputFrame" /> 结构体的实例。
+			</summary>
+			<param name="time">时间戳（秒）。</param>
+		</member>
+		<member name="M:Cryville.Input.InputFrame.#ctor(System.Double,Cryville.Input.InputVector)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.InputFrame" /> 结构体的实例。
+			</summary>
+			<param name="time">时间戳（秒）。</param>
+			<param name="vector">输入向量。</param>
+		</member>
+		<member name="M:Cryville.Input.InputFrame.ToString">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.InputVector">
+			<summary>
+				输入向量。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputVector.X">
+			<summary>
+				该向量的第一个分量。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputVector.Y">
+			<summary>
+				该向量的第二个分量。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputVector.Z">
+			<summary>
+				该向量的第三个分量。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.InputVector.W">
+			<summary>
+				该向量的第四个分量。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.InputVector.#ctor(System.Single)">
+			<summary>
+				创建一个一维的 <see cref="T:Cryville.Input.InputVector" /> 结构体的实例。
+			</summary>
+			<param name="x">向量的第一个分量。</param>
+		</member>
+		<member name="M:Cryville.Input.InputVector.#ctor(System.Single,System.Single)">
+			<summary>
+				创建一个二维的 <see cref="T:Cryville.Input.InputVector" /> 结构体的实例。
+			</summary>
+			<param name="x">向量的第一个分量。</param>
+			<param name="y">向量的第二个分量。</param>
+		</member>
+		<member name="M:Cryville.Input.InputVector.#ctor(System.Single,System.Single,System.Single)">
+			<summary>
+				创建一个三维的 <see cref="T:Cryville.Input.InputVector" /> 结构体的实例。
+			</summary>
+			<param name="x">向量的第一个分量。</param>
+			<param name="y">向量的第二个分量。</param>
+			<param name="z">向量的第三个分量。</param>
+		</member>
+		<member name="M:Cryville.Input.InputVector.#ctor(System.Single,System.Single,System.Single,System.Single)">
+			<summary>
+				创建一个四维的 <see cref="T:Cryville.Input.InputVector" /> 结构体的实例。
+			</summary>
+			<param name="x">向量的第一个分量。</param>
+			<param name="y">向量的第二个分量。</param>
+			<param name="z">向量的第三个分量。</param>
+			<param name="w">向量的第四个分量。</param>
+		</member>
+		<member name="M:Cryville.Input.InputVector.op_Addition(Cryville.Input.InputVector,Cryville.Input.InputVector)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputVector.op_Subtraction(Cryville.Input.InputVector,Cryville.Input.InputVector)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputVector.op_Multiply(System.Single,Cryville.Input.InputVector)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputVector.op_UnaryNegation(Cryville.Input.InputVector)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.InputVector.ToString">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.ReferenceCue">
+			<summary>
+				提供参考系的参考。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.ReferenceCue.PhysicalDimension">
+			<summary>
+				物理量纲。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.ReferenceCue.RelativeUnit">
+			<summary>
+				额外的相对单位。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.ReferenceCue.Flags">
+			<summary>
+				参考特性。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.ReferenceCue.Origin">
+			<summary>
+				原点。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.ReferenceCue.Pivot">
+			<summary>
+				支点。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.ReferenceCue.Transform(Cryville.Input.InputFrame)">
+			<summary>
+				对一个输入帧施加 <see cref="P:Cryville.Input.ReferenceCue.Origin" /> 指定的偏移，将其变换到参考系中。
+			</summary>
+			<param name="frame">输入帧。</param>
+			<returns>变换后的输入帧。</returns>
+		</member>
+		<member name="M:Cryville.Input.ReferenceCue.InverseTransform(Cryville.Input.InputFrame)">
+			<summary>
+				从一个输入帧移除 <see cref="P:Cryville.Input.ReferenceCue.Origin" /> 指定的偏移，将其变换出参考系。
+			</summary>
+			<param name="frame">输入帧。</param>
+			<returns>变换后的输入帧。</returns>
+		</member>
+		<member name="M:Cryville.Input.ReferenceCue.Transform(Cryville.Input.InputFrame,Cryville.Input.InputVector)">
+			<summary>
+				对一个输入帧施加 <see cref="P:Cryville.Input.ReferenceCue.Origin" /> 和 <see cref="P:Cryville.Input.ReferenceCue.Pivot" /> 指定的偏移，将其变换到参考系中。
+			</summary>
+			<param name="frame">输入帧。</param>
+			<param name="universe">全集大小。</param>
+			<returns>变换后的输入帧。</returns>
+		</member>
+		<member name="M:Cryville.Input.ReferenceCue.InverseTransform(Cryville.Input.InputFrame,Cryville.Input.InputVector)">
+			<summary>
+				从一个输入帧移除 <see cref="P:Cryville.Input.ReferenceCue.Origin" /> 和 <see cref="P:Cryville.Input.ReferenceCue.Pivot" /> 指定的偏移，将其变换出参考系。
+			</summary>
+			<param name="frame">输入帧。</param>
+			<param name="universe">全集大小。</param>
+			<returns>变换后的输入帧。</returns>
+		</member>
+		<member name="T:Cryville.Input.PhysicalDimension">
+			<summary>
+				物理量纲。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.PhysicalDimension.Time">
+			<summary>
+				时间量纲指数。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.PhysicalDimension.Length">
+			<summary>
+				长度量纲指数。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.PhysicalDimension.Mass">
+			<summary>
+				质量量纲指数。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.PhysicalDimension.ElectricCurrent">
+			<summary>
+				电流量纲指数。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.PhysicalDimension.ThermodynamicTemperature">
+			<summary>
+				热力学温度量纲指数。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.PhysicalDimension.AmountOfSubstance">
+			<summary>
+				物质的量量纲指数。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.PhysicalDimension.LuminousIntensity">
+			<summary>
+				发光强度量纲指数。
+			</summary>
+		</member>
+		<member name="T:Cryville.Input.RelativeUnit">
+			<summary>
+				相对单位。
+			</summary>
+		</member>
+		<member name="F:Cryville.Input.RelativeUnit.None">
+			<summary>
+				无。
+			</summary>
+		</member>
+		<member name="F:Cryville.Input.RelativeUnit.Pixel">
+			<summary>
+				像素。
+			</summary>
+		</member>
+		<member name="T:Cryville.Input.ReferenceFlag">
+			<summary>
+				参考特性。
+			</summary>
+		</member>
+		<member name="F:Cryville.Input.ReferenceFlag.None">
+			<summary>
+				无。
+			</summary>
+		</member>
+		<member name="F:Cryville.Input.ReferenceFlag.FlipX">
+			<summary>
+				反转 X 轴。
+			</summary>
+		</member>
+		<member name="F:Cryville.Input.ReferenceFlag.FlipY">
+			<summary>
+				反转 Y 轴。
+			</summary>
+		</member>
+		<member name="F:Cryville.Input.ReferenceFlag.FlipZ">
+			<summary>
+				反转 Z 轴。
+			</summary>
+		</member>
+		<member name="F:Cryville.Input.ReferenceFlag.FlipW">
+			<summary>
+				反转 W 轴。
+			</summary>
+		</member>
+		<member name="T:Cryville.Input.SimpleInputConsumer">
+			<summary>
+				一个接收输入帧的简易输入接收器。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.SimpleInputConsumer.#ctor(Cryville.Input.InputManager)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.SimpleInputConsumer" /> 类的实例。
+			</summary>
+			<param name="manager">输入管理器。</param>
+		</member>
+		<member name="M:Cryville.Input.SimpleInputConsumer.Activate">
+			<summary>
+				激活所有输入处理器。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.SimpleInputConsumer.Deactivate">
+			<summary>
+				反激活所有输入处理器。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.SimpleInputConsumer.OnInput(Cryville.Input.InputIdentifier,Cryville.Input.InputFrame)">
+			<summary>
+				在接收到新的输入帧时调用。
+			</summary>
+			<param name="identifier">输入标识。</param>
+			<param name="frame">新的输入帧。</param>
+		</member>
+		<member name="M:Cryville.Input.SimpleInputConsumer.EnumerateEvents(System.Action{Cryville.Input.InputEvent})">
+			<summary>
+				枚举所有队列中的输入事件，依次传入给定的回调函数，然后清空队列。
+			</summary>
+			<param name="cb">回调函数。</param>
+		</member>
+		<member name="M:Cryville.Input.SimpleInputConsumer.EnumerateActiveIdentifiers(System.Action{Cryville.Input.InputIdentifier,Cryville.Input.InputFrame})">
+			<summary>
+				枚举所有活动的输入标识，与其对应的当前输入帧一同，依次传入给定的回调函数。
+			</summary>
+			<param name="cb">回调函数。</param>
+		</member>
+	</members>
+</doc>

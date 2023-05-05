@@ -4,7 +4,7 @@ namespace Cryville.Input {
 	/// </summary>
 	public struct InputEvent {
 		/// <summary>
-		/// The identifier.
+		/// The input identifier.
 		/// </summary>
 		public InputIdentifier Identifier { get; set; }
 		/// <summary>

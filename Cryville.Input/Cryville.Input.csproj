@@ -63,6 +63,9 @@
     <Compile Include="SimpleInputConsumer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Cryville.Input.cmn-hans.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Cryville.Input.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

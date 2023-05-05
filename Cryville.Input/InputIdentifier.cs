@@ -13,7 +13,7 @@ namespace Cryville.Input {
 		/// The input ID.
 		/// </summary>
 		/// <remarks>
-		/// <para>This property is used to distinguish different inputs on the input source. For example, a touch screen that supports simultaneous touches may assign unique IDs to each finger.</para>
+		/// <para>This property is used to distinguish different inputs on the input source. For example, a touch screen that supports simultaneous touches may assign a unique ID to each finger.</para>
 		/// </remarks>
 		public int Id { get; set; }
 		/// <inheritdoc />
