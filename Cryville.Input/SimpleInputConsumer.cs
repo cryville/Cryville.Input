@@ -13,7 +13,7 @@ namespace Cryville.Input {
 		/// <summary>
 		/// Creates an instance of the <see cref="SimpleInputConsumer" /> class.
 		/// </summary>
-		/// <param name="manager">The input consumer.</param>
+		/// <param name="manager">The input manager.</param>
 		public SimpleInputConsumer(InputManager manager) { _manager = manager; }
 		/// <summary>
 		/// Activates all the input handlers.

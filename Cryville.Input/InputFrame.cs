@@ -12,7 +12,7 @@ namespace Cryville.Input {
 		/// </summary>
 		/// <remarks>
 		/// <para>An input frame with this property set to <see langword="true" /> marks the end of life of an input ID (see <see cref="InputIdentifier.Id" />.) This usually occurs when, for example, the button of the device is released.</para>
-		/// <para>When this property is set to <see langword="true" />, all the components of the vector is meaningless and should be set to 0.</para>
+		/// <para>When this property is set to <see langword="true" />, all the components of <see cref="Vector" /> is meaningless and should be set to 0.</para>
 		/// </remarks>
 		public bool IsNull { get; set; }
 		/// <summary>

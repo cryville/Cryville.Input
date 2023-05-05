@@ -82,6 +82,9 @@ namespace Cryville.Input {
 		/// Gets the current timestamp of the input handler.
 		/// </summary>
 		/// <returns>The current timestamp of the input handler in seconds.</returns>
+		/// <remarks>
+		/// <para>The timestamp returned by this method is obtained from the same source as the <see cref="InputFrame.Time" /> of the frame the handler sends whenever possible. However, there is no guarantee that, when calling this method, all the frames whose <see cref="InputFrame.Time" /> is less than the timestamp returned by this method have been sent.</para>
+		/// </remarks>
 		public abstract double GetCurrentTimestamp();
 		/// <summary>
 		/// Sends a new input frame.

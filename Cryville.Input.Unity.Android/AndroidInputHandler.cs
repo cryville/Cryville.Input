@@ -2,7 +2,14 @@ using System;
 using UnityEngine;
 
 namespace Cryville.Input.Unity.Android {
+	/// <summary>
+	/// An <see cref="InputHandler" /> that handles Android input.
+	/// </summary>
+	/// <typeparam name="TSelf">The type that inherits this class.</typeparam>
 	public abstract class AndroidInputHandler<TSelf> : InputHandler where TSelf : AndroidInputHandler<TSelf> {
+		/// <summary>
+		/// The instance of this class.
+		/// </summary>
 		protected static TSelf Instance { get; private set; }
 
 		readonly IntPtr _t_T;
@@ -14,6 +21,12 @@ namespace Cryville.Input.Unity.Android {
 
 		bool _activated;
 
+		/// <summary>
+		/// Creates an instance of the <see cref="AndroidInputHandler{TSelf}" /> class.
+		/// </summary>
+		/// <param name="className">The full name of the Java class that performs the low-level jobs.</param>
+		/// <exception cref="InvalidOperationException">An instance of this class have already been created.</exception>
+		/// <exception cref="NotSupportedException">Android input is not supported on the current device.</exception>
 		public AndroidInputHandler(string className) {
 			if (Instance != null)
 				throw new InvalidOperationException("AndroidInputHandler already created");
@@ -42,18 +55,21 @@ namespace Cryville.Input.Unity.Android {
 			);
 		}
 
+		/// <inheritdoc />
 		protected override void Activate() {
 			if (_activated) return;
 			_activated = true;
 			AndroidJNI.CallVoidMethod(_i_T, _m_T_activate, _p_void);
 		}
 
+		/// <inheritdoc />
 		protected override void Deactivate() {
 			if (!_activated) return;
 			_activated = false;
 			AndroidJNI.CallVoidMethod(_i_T, _m_T_deactivate, _p_void);
 		}
 
+		/// <inheritdoc />
 		public override void Dispose(bool disposing) {
 			if (disposing) {
 				Deactivate();

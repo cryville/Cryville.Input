@@ -3,63 +3,97 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Cryville.Input.Unity {
+	/// <summary>
+	/// An <see cref="InputHandler" /> that handles Unity GUI input.
+	/// </summary>
+	/// <typeparam name="T">The GUI event receiver type.</typeparam>
 	public class UnityGuiInputHandler<T> : InputHandler where T : UnityGuiEventReceiver {
 		GameObject _receiver;
 		T _recvComp;
 
+		/// <summary>
+		/// Creates an instance of the <see cref="UnityGuiInputHandler{T}" /> class.
+		/// </summary>
 		public UnityGuiInputHandler() { }
 
+		/// <inheritdoc />
 		protected override void Activate() {
 			_receiver = new GameObject("__guiRecv__");
 			_recvComp = _receiver.AddComponent<T>();
 			_recvComp.SetCallback(Feed);
 		}
 
+		/// <inheritdoc />
 		protected override void Deactivate() {
 			if (_receiver) GameObject.Destroy(_receiver);
 		}
 
+		/// <inheritdoc />
 		public override void Dispose(bool disposing) {
 			if (disposing) {
 				Deactivate();
 			}
 		}
-		
+
+		/// <inheritdoc />
 		public override bool IsNullable { get { return true; } }
 
+		/// <inheritdoc />
 		public override byte Dimension { get { return 0; } }
 
 		readonly static ReferenceCue _refCue = new ReferenceCue { };
+		/// <inheritdoc />
 		public override ReferenceCue ReferenceCue => _refCue;
 
+		/// <inheritdoc />
 		public override string GetTypeName(int type) {
 			return _recvComp.GetKeyName(type);
 		}
 
+		/// <inheritdoc />
 		public override double GetCurrentTimestamp() {
 			return Time.realtimeSinceStartupAsDouble;
 		}
 	}
 
+	/// <summary>
+	/// Unity GUI event receiver.
+	/// </summary>
 	public abstract class UnityGuiEventReceiver : MonoBehaviour {
+		/// <summary>
+		/// The callback function to be called when a new input frame is received.
+		/// </summary>
 		protected Action<int, int, InputFrame> Callback;
-		protected readonly HashSet<int> Keys = new HashSet<int>();
+		/// <summary>
+		/// The set of currently active keys.
+		/// </summary>
+		protected readonly HashSet<int> ActiveKeys = new HashSet<int>();
+		/// <summary>
+		/// Sets the callback function to be called when a new input frame is received.
+		/// </summary>
+		/// <param name="h">The callback function to be called when a new input frame is received.</param>
 		public void SetCallback(Action<int, int, InputFrame> h) {
 			Callback = h;
 		}
-		public abstract string GetKeyName(int type);
+		/// <summary>
+		/// Gets the friendly name of the specified key.
+		/// </summary>
+		/// <param name="key">The key.</param>
+		/// <returns>The friendly name of the specified key.</returns>
+		public abstract string GetKeyName(int key);
 		void Awake() {
 			useGUILayout = false;
 		}
 		void Update() {
 			double time = Time.realtimeSinceStartupAsDouble;
-			foreach (var k in Keys) {
+			foreach (var k in ActiveKeys) {
 				Callback(k, 0, new InputFrame(time, new InputVector()));
 			}
 		}
 	}
 
 	public class UnityKeyReceiver : UnityGuiEventReceiver {
+		/// <inheritdoc />
 		public override string GetKeyName(int type) {
 			return Enum.GetName(typeof(KeyCode), type);
 		}
@@ -70,13 +104,13 @@ namespace Cryville.Input.Unity {
 			var key = (int)e.keyCode;
 			switch (e.type) {
 				case EventType.KeyDown:
-					if (!Keys.Contains(key)) {
+					if (!ActiveKeys.Contains(key)) {
 						Callback(key, 0, new InputFrame(time, new InputVector()));
-						Keys.Add(key);
+						ActiveKeys.Add(key);
 					}
 					break;
 				case EventType.KeyUp:
-					Keys.Remove(key);
+					ActiveKeys.Remove(key);
 					Callback(key, 0, new InputFrame(time));
 					break;
 			}
@@ -84,6 +118,7 @@ namespace Cryville.Input.Unity {
 	}
 
 	public class UnityMouseReceiver : UnityGuiEventReceiver {
+		/// <inheritdoc />
 		public override string GetKeyName(int type) {
 			switch (type) {
 				case 0: return "Mouse Left Button";
@@ -98,13 +133,13 @@ namespace Cryville.Input.Unity {
 			var key = e.button;
 			switch (e.type) {
 				case EventType.MouseDown:
-					if (!Keys.Contains(key)) {
+					if (!ActiveKeys.Contains(key)) {
 						Callback(key, 0, new InputFrame(time, new InputVector()));
-						Keys.Add(key);
+						ActiveKeys.Add(key);
 					}
 					break;
 				case EventType.MouseUp:
-					Keys.Remove(key);
+					ActiveKeys.Remove(key);
 					Callback(key, 0, new InputFrame(time));
 					break;
 			}

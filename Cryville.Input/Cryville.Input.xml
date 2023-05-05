@@ -102,6 +102,9 @@
             Gets the current timestamp of the input handler.
             </summary>
             <returns>The current timestamp of the input handler in seconds.</returns>
+            <remarks>
+            <para>The timestamp returned by this method is obtained from the same source as the <see cref="P:Cryville.Input.InputFrame.Time" /> of the frame the handler sends whenever possible. However, there is no guarantee that, when calling this method, all the frames whose <see cref="P:Cryville.Input.InputFrame.Time" /> is less than the timestamp returned by this method have been sent.</para>
+            </remarks>
         </member>
         <member name="M:Cryville.Input.InputHandler.Feed(System.Int32,System.Int32,Cryville.Input.InputFrame)">
             <summary>
@@ -227,7 +230,7 @@
             </summary>
             <remarks>
             <para>An input frame with this property set to <see langword="true" /> marks the end of life of an input ID (see <see cref="P:Cryville.Input.InputIdentifier.Id" />.) This usually occurs when, for example, the button of the device is released.</para>
-            <para>When this property is set to <see langword="true" />, all the components of the vector is meaningless and should be set to 0.</para>
+            <para>When this property is set to <see langword="true" />, all the components of <see cref="P:Cryville.Input.InputFrame.Vector" /> is meaningless and should be set to 0.</para>
             </remarks>
         </member>
         <member name="P:Cryville.Input.InputFrame.Vector">
@@ -475,7 +478,7 @@
             <summary>
             Creates an instance of the <see cref="T:Cryville.Input.SimpleInputConsumer" /> class.
             </summary>
-            <param name="manager">The input consumer.</param>
+            <param name="manager">The input manager.</param>
         </member>
         <member name="M:Cryville.Input.SimpleInputConsumer.Activate">
             <summary>
