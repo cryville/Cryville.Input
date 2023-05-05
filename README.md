@@ -74,7 +74,14 @@ void HandleInputEvent(InputEvent ev) {
 - [x] Android touch
 
 ### Windows native input
-- [ ] Windows key (`WM_KEY`)
-- [ ] Windows mouse (`WM_MOUSE`)
+- [ ] Windows key (`WM_KEY*`)
+- [ ] Windows mouse (`WM_MOUSE*`)
 - [ ] Windows pointer (`WM_POINTER*`)
 - [ ] Windows touch (`WM_TOUCH`)
+
+## FAQ
+### An error occurred while running `ndk-build`: Expected two items in TARGET\_TOOLCHAIN\_LIST.
+Go into the `.mk` file shown in the error message and modify the line `ifneq ($(words $(TARGET_TOOLCHAIN_LIST)), 1)` to `ifneq ($(words $(TARGET_TOOLCHAIN_LIST)), 2)`.
+
+### What coordinate system do the input handlers use?
+The coordinate system an input handler uses depends on its underlying API. Use `ReferenceCue.InverseTransform(InputFrame)` to transform a received frame to a universal reference. If the device has a boundary, use `ReferenceCue.InverseTransform(InputFrame, InputVector)` instead and specify the size in the second parameter.

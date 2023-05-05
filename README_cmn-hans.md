@@ -74,7 +74,14 @@ void HandleInputEvent(InputEvent ev) {
 - [x] Android 触控
 
 ### Windows 本地输入
-- [ ] Windows 按键（`WM_KEY`）
-- [ ] Windows 鼠标（`WM_MOUSE`）
+- [ ] Windows 按键（`WM_KEY*`）
+- [ ] Windows 鼠标（`WM_MOUSE*`）
 - [ ] Windows 指针（`WM_POINTER*`）
 - [ ] Windows 触控（`WM_TOUCH`）
+
+## 常见问题
+### 运行 `ndk-build` 时发生了一个错误：Expected two items in TARGET\_TOOLCHAIN\_LIST。
+打开错误消息里提及的 `.mk` 文件，将 `ifneq ($(words $(TARGET_TOOLCHAIN_LIST)), 1)` 这一行修改为 `ifneq ($(words $(TARGET_TOOLCHAIN_LIST)), 2)`。
+
+### 输入处理器使用的是什么坐标系？
+一个输入处理器使用的坐标系取决于其底层 API。可以使用 `ReferenceCue.InverseTransform(InputFrame)` 将一个接收到的输入帧变换到一个统一的参考系。如果设备有边界，可以使用 `ReferenceCue.InverseTransform(InputFrame, InputVector)`，在第二个参数指定设备大小。
