@@ -57,7 +57,7 @@ namespace Cryville.Input.Unity.Android {
 		/// Creates an instance of the <see cref="AndroidAccelerometerHandler" /> class.
 		/// </summary>
 		public AndroidAccelerometerHandler() : base("Accelerometer", 3) { }
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension { Length = 1, Time = -2 },
 		};
 		/// <inheritdoc />
@@ -71,7 +71,7 @@ namespace Cryville.Input.Unity.Android {
 		/// Creates an instance of the <see cref="AndroidAccelerometerUncalibratedHandler" /> class.
 		/// </summary>
 		public AndroidAccelerometerUncalibratedHandler() : base("AccelerometerUncalibrated", 3) { }
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension { Length = 1, Time = -2 },
 		};
 		/// <inheritdoc />
@@ -85,7 +85,7 @@ namespace Cryville.Input.Unity.Android {
 		/// Creates an instance of the <see cref="AndroidGameRotationVectorHandler" /> class.
 		/// </summary>
 		public AndroidGameRotationVectorHandler() : base("GameRotationVector", 4) { }
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension(),
 		};
 		/// <inheritdoc />
@@ -99,7 +99,7 @@ namespace Cryville.Input.Unity.Android {
 		/// Creates an instance of the <see cref="AndroidGravityHandler" /> class.
 		/// </summary>
 		public AndroidGravityHandler() : base("Gravity", 3) { }
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension { Length = 1, Time = -2 },
 		};
 		/// <inheritdoc />
@@ -113,7 +113,7 @@ namespace Cryville.Input.Unity.Android {
 		/// Creates an instance of the <see cref="AndroidGyroscopeHandler" /> class.
 		/// </summary>
 		public AndroidGyroscopeHandler() : base("Gyroscope", 3) { }
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension { Time = -1 },
 		};
 		/// <inheritdoc />
@@ -122,12 +122,12 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android linear acceleration sensor input.
 	/// </summary>
-	public class AndroidLinearAccelerationHandler : AndroidSensorHandler<AndroidLinearAccelerationHandler> {
+	public class AndroidLinearAccelerationHandler : AndroidSensorHandler {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidLinearAccelerationHandler" /> class.
 		/// </summary>
 		public AndroidLinearAccelerationHandler() : base("LinearAcceleration", 3) { }
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension { Length = 1, Time = -2 },
 		};
 		/// <inheritdoc />
@@ -141,7 +141,7 @@ namespace Cryville.Input.Unity.Android {
 		/// Creates an instance of the <see cref="AndroidMagneticFieldHandler" /> class.
 		/// </summary>
 		public AndroidMagneticFieldHandler() : base("MagneticField", 3) { }
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension { Mass = 1, Time = -2, ElectricCurrent = -1 },
 		};
 		/// <inheritdoc />
@@ -155,7 +155,7 @@ namespace Cryville.Input.Unity.Android {
 		/// Creates an instance of the <see cref="AndroidMagneticFieldUncalibratedHandler" /> class.
 		/// </summary>
 		public AndroidMagneticFieldUncalibratedHandler() : base("MagneticFieldUncalibrated", 3) { }
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension { Mass = 1, Time = -2, ElectricCurrent = -1 },
 		};
 		/// <inheritdoc />
@@ -169,7 +169,7 @@ namespace Cryville.Input.Unity.Android {
 		/// Creates an instance of the <see cref="AndroidRotationVectorHandler" /> class.
 		/// </summary>
 		public AndroidRotationVectorHandler() : base("RotationVector", 4) { }
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension(),
 		};
 		/// <inheritdoc />

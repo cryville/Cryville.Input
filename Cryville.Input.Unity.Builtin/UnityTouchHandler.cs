@@ -43,7 +43,7 @@ namespace Cryville.Input.Unity {
 		/// <inheritdoc />
 		public override byte Dimension { get { return 2; } }
 
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension { Length = 1 },
 			RelativeUnit = RelativeUnit.Pixel,
 		};

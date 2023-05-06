@@ -17,7 +17,7 @@ namespace Cryville.Input.Unity.Android {
 		/// <inheritdoc />
 		public override byte Dimension => 2;
 
-		readonly static ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new ReferenceCue {
 			PhysicalDimension = new PhysicalDimension { Length = 1 },
 			RelativeUnit = RelativeUnit.Pixel,
 			Flags = ReferenceFlag.FlipY,
