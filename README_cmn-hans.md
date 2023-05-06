@@ -21,9 +21,9 @@
 直接复制 `Cryville.Input.Unity.Builtin` 文件夹内的所有内容到 Unity 项目的 `Assets/Plugins/Cryville.Input.Unity.Builtin` 文件夹内。
 
 ### 在 Unity 中配置 Android 本地输入
-1. 复制 `Cryville.Input.Unity.Android` 文件夹内**除了 `Native` 文件夹**的所有内容到 Unity 项目的 `Assets/Plugins/Cryville.Input.Unity.Android` 文件夹内。
-2. 确认安装了 Android NDK。在 `Cryville.Input.Unity.Android/Native` 文件夹打开命令行（作为工作目录）运行 Android NDK 内的 `ndk-build`。
-3. 复制 `Cryville.Input.Unity.Android/Native/libs` 中的两个文件夹到 Unity 项目的 `Assets/Plugins/Android` 文件夹内。
+1. 复制 `Cryville.Input.Unity.Android` 文件夹内的所有内容到 Unity 项目的 `Assets/Plugins/Cryville.Input.Unity.Android` 文件夹内。
+2. 确认安装了 Android NDK。在 `Cryville.Input.Unity.Android.Native` 文件夹打开命令行（作为工作目录）运行 Android NDK 内的 `ndk-build`。
+3. 复制 `Cryville.Input.Unity.Android.Native/libs` 中的两个文件夹到 Unity 项目的 `Assets/Plugins/Android` 文件夹内。
 
 ## 使用
 使用本库最简单的方法是创建一个 `SimpleInputConsumer` 并周期性（通常是每个游戏刻）检查新的输入事件。创建 `SimpleInputConsumer` 前需要创建一个 `InputManager`，在那之前，需要对想要使用的输入处理器类型调用 `InputManager.HandlerRegistries.Add()`。如下面的例子所示：
