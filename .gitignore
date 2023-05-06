@@ -5,6 +5,7 @@
 
 # User-specific files
 /Cryville.Input.Unity.*/*.csproj
+/Cryville.Input.Unity.Android.Native/*.*
 /_*
 *.py
 *.rsuser

@@ -1,4 +1,3 @@
-using Cryville.Common.Interop;
 using Cryville.Common.Logging;
 using System;
 using System.Text.RegularExpressions;
@@ -7,8 +6,7 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android sensor input.
 	/// </summary>
-	/// <typeparam name="TSelf">The type that inherits this class.</typeparam>
-	public abstract class AndroidSensorHandler<TSelf> : AndroidInputHandler<AndroidSensorHandler<TSelf>> where TSelf : AndroidSensorHandler<TSelf> {
+	public abstract class AndroidSensorHandler : AndroidInputHandler {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidSensorHandler{TSelf}" /> class.
 		/// </summary>
@@ -40,13 +38,10 @@ namespace Cryville.Input.Unity.Android {
 			return JavaStaticMethods.SystemClock_elapsedRealtimeNanos() / 1e9;
 		}
 
-		private protected sealed override AndroidInputProxy_Callback Callback { get { return OnFeed; } }
-
-		[MonoPInvokeCallback]
-		static void OnFeed(int id, int action, long time, float x, float y, float z, float w) {
+		internal override void OnFeed(int id, int action, long time, float x, float y, float z, float w) {
 			try {
 				double timeSecs = time / 1e9;
-				Instance.Feed(0, id, new InputFrame(timeSecs, new InputVector(x, y, z, w)));
+				Feed(0, id, new InputFrame(timeSecs, new InputVector(x, y, z, w)));
 			}
 			catch (Exception ex) {
 				Logger.Log("main", 4, "Input", "An error occurred while handling an Android sensor event: {0}", ex);
@@ -57,7 +52,7 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android accelerometer sensor input.
 	/// </summary>
-	public class AndroidAccelerometerHandler : AndroidSensorHandler<AndroidAccelerometerHandler> {
+	public class AndroidAccelerometerHandler : AndroidSensorHandler {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidAccelerometerHandler" /> class.
 		/// </summary>
@@ -71,7 +66,7 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android accelerometer (uncalibrated) sensor input.
 	/// </summary>
-	public class AndroidAccelerometerUncalibratedHandler : AndroidSensorHandler<AndroidAccelerometerUncalibratedHandler> {
+	public class AndroidAccelerometerUncalibratedHandler : AndroidSensorHandler {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidAccelerometerUncalibratedHandler" /> class.
 		/// </summary>
@@ -85,7 +80,7 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android game rotation vector sensor input.
 	/// </summary>
-	public class AndroidGameRotationVectorHandler : AndroidSensorHandler<AndroidGameRotationVectorHandler> {
+	public class AndroidGameRotationVectorHandler : AndroidSensorHandler {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidGameRotationVectorHandler" /> class.
 		/// </summary>
@@ -99,7 +94,7 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android gravity sensor input.
 	/// </summary>
-	public class AndroidGravityHandler : AndroidSensorHandler<AndroidGravityHandler> {
+	public class AndroidGravityHandler : AndroidSensorHandler {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidGravityHandler" /> class.
 		/// </summary>
@@ -113,7 +108,7 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android gyroscope sensor input.
 	/// </summary>
-	public class AndroidGyroscopeHandler : AndroidSensorHandler<AndroidGyroscopeHandler> {
+	public class AndroidGyroscopeHandler : AndroidSensorHandler {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidGyroscopeHandler" /> class.
 		/// </summary>
@@ -141,7 +136,7 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android magnetic field sensor input.
 	/// </summary>
-	public class AndroidMagneticFieldHandler : AndroidSensorHandler<AndroidMagneticFieldHandler> {
+	public class AndroidMagneticFieldHandler : AndroidSensorHandler {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidMagneticFieldHandler" /> class.
 		/// </summary>
@@ -155,7 +150,7 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android magnetic field (uncalibrated) sensor input.
 	/// </summary>
-	public class AndroidMagneticFieldUncalibratedHandler : AndroidSensorHandler<AndroidMagneticFieldUncalibratedHandler> {
+	public class AndroidMagneticFieldUncalibratedHandler : AndroidSensorHandler {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidMagneticFieldUncalibratedHandler" /> class.
 		/// </summary>
@@ -169,7 +164,7 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android rotation vector sensor input.
 	/// </summary>
-	public class AndroidRotationVectorHandler : AndroidSensorHandler<AndroidRotationVectorHandler> {
+	public class AndroidRotationVectorHandler : AndroidSensorHandler {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidRotationVectorHandler" /> class.
 		/// </summary>

@@ -1,9 +1,19 @@
 using System.Runtime.InteropServices;
 
 namespace Cryville.Input.Unity.Android {
-	internal delegate void AndroidInputProxy_Callback(int id, int action, long time, float x, float y, float z, float w);
+	struct ProxiedInputFrame {
+		public int hid;
+		public int id;
+		public int action;
+		public long time;
+		public float x;
+		public float y;
+		public float z;
+		public float w;
+	};
 	internal static class NativeMethods {
 		[DllImport("AndroidInputProxy")]
-		public static extern void AndroidInputProxy_RegisterCallback(int hid, AndroidInputProxy_Callback cb);
+		[PreserveSig]
+		public static extern int AndroidInputProxy_Poll(out ProxiedInputFrame frame);
 	}
 }
