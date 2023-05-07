@@ -36,6 +36,13 @@
 			</param>
 			<param name="frame">新的输入帧。</param>
 		</member>
+		<member name="T:Cryville.Input.InputBatchHandler">
+			<summary>
+				表示处理 <see cref="E:Cryville.Input.InputHandler.OnBatch" /> 事件的方法。
+			</summary>
+			<param name="handler">输入处理器。</param>
+			<param name="time">输入批次的时间戳（秒）。</param>
+		</member>
 		<member name="T:Cryville.Input.InputHandler">
 			<summary>
 				输入处理器。
@@ -45,6 +52,20 @@
 			<summary>
 				在新的输入帧被发送时发生。
 			</summary>
+			<remarks>
+				<para>不保证输入帧按时间顺序发送。</para>
+			</remarks>
+		</member>
+		<member name="E:Cryville.Input.InputHandler.OnBatch">
+			<summary>
+				在输入批次完成发送时发生。
+			</summary>
+			<remarks>
+				<para>
+					该事件在设备能够确认所有活跃的输入标识已经发送了给定时间戳之前的所有输入帧时发生。在该事件发生之前，可能会有时间戳大于本事件时间戳的输入帧被发送。如果一个输入标识在两次相邻的 <see cref="E:Cryville.Input.InputHandler.OnBatch" /> 事件之间没有出现的话，那么它就是没有更新。
+				</para>
+				<para>然而，在没有输入标识活跃的情况下，不保证该事件会发生。</para>
+			</remarks>
 		</member>
 		<member name="M:Cryville.Input.InputHandler.Finalize">
 			<inheritdoc />
@@ -123,6 +144,17 @@
 			<param name="type">输入帧的类型。</param>
 			<param name="id">输入帧的 ID。</param>
 			<param name="frame">输入帧。</param>
+		</member>
+		<member name="M:Cryville.Input.InputHandler.Batch(System.Double)">
+			<summary>
+				将一个输入批次标记结束。
+			</summary>
+			<param name="time">输入批次的时间戳（秒）。</param>
+			<remarks>
+				<para>
+					详细信息参见 <see cref="E:Cryville.Input.InputHandler.OnBatch" />。
+				</para>
+			</remarks>
 		</member>
 		<member name="T:Cryville.Input.InputIdentifier">
 			<summary>

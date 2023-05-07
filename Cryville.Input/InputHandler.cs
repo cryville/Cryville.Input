@@ -8,6 +8,12 @@ namespace Cryville.Input {
 	/// <param name="frame">The new input frame.</param>
 	public delegate void InputFrameHandler(InputIdentifier identifier, InputFrame frame);
 	/// <summary>
+	/// Represents the method that will handle the <see cref="InputHandler.OnBatch" /> event.
+	/// </summary>
+	/// <param name="handler">The input handler.</param>
+	/// <param name="time">The timestamp of the batch in seconds.</param>
+	public delegate void InputBatchHandler(InputHandler handler, double time);
+	/// <summary>
 	/// Input handler.
 	/// </summary>
 	public abstract class InputHandler : IDisposable {
@@ -15,6 +21,9 @@ namespace Cryville.Input {
 		/// <summary>
 		/// Occurs when a new input frame is sent.
 		/// </summary>
+		/// <remarks>
+		/// <para>There is no guarantee that frames are sent in the time order.</para>
+		/// </remarks>
 		public event InputFrameHandler OnInput {
 			add {
 				if (m_onInput == null) Activate();
@@ -25,6 +34,25 @@ namespace Cryville.Input {
 				if (m_onInput == null) return;
 				m_onInput -= value;
 				if (m_onInput == null) Deactivate();
+			}
+		}
+
+		InputBatchHandler m_onBatch;
+		/// <summary>
+		/// Occurs when an input batch is finished sending.
+		/// </summary>
+		/// <remarks>
+		/// <para>This event occurs when the device can guarantee that all the active identifiers have sent all their frames before the given timestamp. There may be input frames with later timestamps sent before this event occurs. If an input identifier does not appears between two subsequent <see cref="OnBatch" /> events, then there is no update on it.</para>
+		/// <para>However, there is no guarantee that this event will occur when no input identifier is active.</para>
+		/// </remarks>
+		public event InputBatchHandler OnBatch {
+			add {
+				m_onBatch -= value;
+				m_onBatch += value;
+			}
+			remove {
+				if (m_onBatch == null) return;
+				m_onBatch -= value;
 			}
 		}
 
@@ -94,6 +122,16 @@ namespace Cryville.Input {
 		/// <param name="frame">The input frame.</param>
 		protected void Feed(int type, int id, InputFrame frame) {
 			m_onInput?.Invoke(new InputIdentifier { Source = new InputSource { Handler = this, Type = type }, Id = id }, frame);
+		}
+		/// <summary>
+		/// Marks the end of an input batch.
+		/// </summary>
+		/// <param name="time">The timestamp of the input batch in seconds.</param>
+		/// <remarks>
+		/// <para>See <see cref="OnBatch" /> for more information.</para>
+		/// </remarks>
+		protected void Batch(double time) {
+			m_onBatch?.Invoke(this, time);
 		}
 	}
 }

@@ -34,6 +34,13 @@
             <param name="identifier">The input identifier of <paramref name="frame" />.</param>
             <param name="frame">The new input frame.</param>
         </member>
+        <member name="T:Cryville.Input.InputBatchHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:Cryville.Input.InputHandler.OnBatch" /> event.
+            </summary>
+            <param name="handler">The input handler.</param>
+            <param name="time">The timestamp of the batch in seconds.</param>
+        </member>
         <member name="T:Cryville.Input.InputHandler">
             <summary>
             Input handler.
@@ -43,6 +50,18 @@
             <summary>
             Occurs when a new input frame is sent.
             </summary>
+            <remarks>
+            <para>There is no guarantee that frames are sent in the time order.</para>
+            </remarks>
+        </member>
+        <member name="E:Cryville.Input.InputHandler.OnBatch">
+            <summary>
+            Occurs when an input batch is finished sending.
+            </summary>
+            <remarks>
+            <para>This event occurs when the device can guarantee that all the active identifiers have sent all their frames before the given timestamp. There may be input frames with later timestamps sent before this event occurs. If an input identifier does not appears between two subsequent <see cref="E:Cryville.Input.InputHandler.OnBatch" /> events, then there is no update on it.</para>
+            <para>However, there is no guarantee that this event will occur when no input identifier is active.</para>
+            </remarks>
         </member>
         <member name="M:Cryville.Input.InputHandler.Finalize">
             <inheritdoc />
@@ -113,6 +132,15 @@
             <param name="type">The type of the input frame.</param>
             <param name="id">The ID of the input frame.</param>
             <param name="frame">The input frame.</param>
+        </member>
+        <member name="M:Cryville.Input.InputHandler.Batch(System.Double)">
+            <summary>
+            Marks the end of an input batch.
+            </summary>
+            <param name="time">The timestamp of the input batch in seconds.</param>
+            <remarks>
+            <para>See <see cref="E:Cryville.Input.InputHandler.OnBatch" /> for more information.</para>
+            </remarks>
         </member>
         <member name="T:Cryville.Input.InputIdentifier">
             <summary>

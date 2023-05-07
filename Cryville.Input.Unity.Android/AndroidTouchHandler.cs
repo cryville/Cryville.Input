@@ -42,9 +42,14 @@ namespace Cryville.Input.Unity.Android {
 		internal override void OnFeed(int id, int action, long time, float x, float y, float z, float w) {
 			try {
 				double timeSecs = time / 1000.0;
-				Feed(0, id, new InputFrame(timeSecs, new InputVector(x, y)));
-				if (action == 1 /*ACTION_UP*/ || action == 3 /*ACTION_CANCEL*/ || action == 6 /*ACTION_POINTER_UP*/)
-					Feed(0, id, new InputFrame(timeSecs));
+				if (action == -2) {
+					Batch(timeSecs);
+				}
+				else {
+					Feed(0, id, new InputFrame(timeSecs, new InputVector(x, y)));
+					if (action == 1 /*ACTION_UP*/ || action == 3 /*ACTION_CANCEL*/ || action == 6 /*ACTION_POINTER_UP*/)
+						Feed(0, id, new InputFrame(timeSecs));
+				}
 			}
 			catch (Exception ex) {
 				Logger.Log("main", 4, "Input", "An error occurred while handling an Android touch event: {0}", ex);

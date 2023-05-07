@@ -79,6 +79,7 @@ namespace Cryville.Input.Unity {
 				double time = Time.realtimeSinceStartupAsDouble;
 				Vector3 pos = unity::Input.mousePosition;
 				_handler.Feed(0, 0, new InputFrame(time, new InputVector(pos.x, pos.y)));
+				_handler.Batch(time);
 			}
 		}
 	}

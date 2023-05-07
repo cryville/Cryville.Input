@@ -86,6 +86,7 @@ namespace Cryville.Input.Unity {
 						_handler.Feed(0, t.fingerId, new InputFrame(time));
 					}
 				}
+				_handler.Batch(time);
 			}
 		}
 	}

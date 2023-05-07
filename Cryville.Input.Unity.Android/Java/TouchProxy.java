@@ -44,6 +44,7 @@ public final class TouchProxy extends Proxy implements View.OnTouchListener {
 				feed(id, action, time, x, y);
 			}
 		}
+		feed(0, -2, time);
 		return false;
 	}
 }

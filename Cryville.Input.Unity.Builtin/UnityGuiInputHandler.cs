@@ -20,7 +20,8 @@ namespace Cryville.Input.Unity {
 		protected override void Activate() {
 			_receiver = new GameObject("__guiRecv__");
 			_recvComp = _receiver.AddComponent<T>();
-			_recvComp.SetCallback(Feed);
+			_recvComp.SetFeedCallback(Feed);
+			_recvComp.SetBatchCallback(Batch);
 		}
 
 		/// <inheritdoc />
@@ -63,18 +64,29 @@ namespace Cryville.Input.Unity {
 		/// <summary>
 		/// The callback function to be called when a new input frame is received.
 		/// </summary>
-		protected Action<int, int, InputFrame> Callback;
-		/// <summary>
-		/// The set of currently active keys.
-		/// </summary>
-		protected readonly HashSet<int> ActiveKeys = new HashSet<int>();
+		protected Action<int, int, InputFrame> Feed;
 		/// <summary>
 		/// Sets the callback function to be called when a new input frame is received.
 		/// </summary>
 		/// <param name="h">The callback function to be called when a new input frame is received.</param>
-		public void SetCallback(Action<int, int, InputFrame> h) {
-			Callback = h;
+		public void SetFeedCallback(Action<int, int, InputFrame> h) {
+			Feed = h;
 		}
+		/// <summary>
+		/// The callback function to be called when the current input batch is finished receiving.
+		/// </summary>
+		protected Action<double> Batch;
+		/// <summary>
+		/// Sets the callback function to be called when the current input batch is finished receiving.
+		/// </summary>
+		/// <param name="h">The callback function to be called when the current input batch is finished receiving.</param>
+		public void SetBatchCallback(Action<double> h) {
+			Batch = h;
+		}
+		/// <summary>
+		/// The set of currently active keys.
+		/// </summary>
+		protected readonly HashSet<int> ActiveKeys = new HashSet<int>();
 		/// <summary>
 		/// Gets the friendly name of the specified key.
 		/// </summary>
@@ -87,8 +99,9 @@ namespace Cryville.Input.Unity {
 		void Update() {
 			double time = Time.realtimeSinceStartupAsDouble;
 			foreach (var k in ActiveKeys) {
-				Callback(k, 0, new InputFrame(time, new InputVector()));
+				Feed(k, 0, new InputFrame(time, new InputVector()));
 			}
+			Batch(time);
 		}
 	}
 
@@ -105,13 +118,13 @@ namespace Cryville.Input.Unity {
 			switch (e.type) {
 				case EventType.KeyDown:
 					if (!ActiveKeys.Contains(key)) {
-						Callback(key, 0, new InputFrame(time, new InputVector()));
+						Feed(key, 0, new InputFrame(time, new InputVector()));
 						ActiveKeys.Add(key);
 					}
 					break;
 				case EventType.KeyUp:
 					ActiveKeys.Remove(key);
-					Callback(key, 0, new InputFrame(time));
+					Feed(key, 0, new InputFrame(time));
 					break;
 			}
 		}
@@ -134,13 +147,13 @@ namespace Cryville.Input.Unity {
 			switch (e.type) {
 				case EventType.MouseDown:
 					if (!ActiveKeys.Contains(key)) {
-						Callback(key, 0, new InputFrame(time, new InputVector()));
+						Feed(key, 0, new InputFrame(time, new InputVector()));
 						ActiveKeys.Add(key);
 					}
 					break;
 				case EventType.MouseUp:
 					ActiveKeys.Remove(key);
-					Callback(key, 0, new InputFrame(time));
+					Feed(key, 0, new InputFrame(time));
 					break;
 			}
 		}

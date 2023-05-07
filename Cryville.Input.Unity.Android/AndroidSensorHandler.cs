@@ -42,6 +42,7 @@ namespace Cryville.Input.Unity.Android {
 			try {
 				double timeSecs = time / 1e9;
 				Feed(0, id, new InputFrame(timeSecs, new InputVector(x, y, z, w)));
+				Batch(timeSecs);
 			}
 			catch (Exception ex) {
 				Logger.Log("main", 4, "Input", "An error occurred while handling an Android sensor event: {0}", ex);
