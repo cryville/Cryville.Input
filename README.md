@@ -21,7 +21,7 @@ Simply copy all the files in `Cryville.Input/bin/Release` to the `Assets/Plugins
 Simply copy all the contents in `Cryville.Input.Unity.Builtin` to the `Assets/Plugins/Cryville.Input.Unity.Builtin` folder in your unity project.
 
 ### Setting up Android native input in Unity
-1. Copy all the contents in `Cryville.Input.Unity.Android` **except the `Native` folder** to the `Assets/Plugins/Cryville.Input.Unity.Android` folder in your unity project.
+1. Copy all the contents in `Cryville.Input.Unity.Android` to the `Assets/Plugins/Cryville.Input.Unity.Android` folder in your unity project.
 2. Make sure you have Android NDK installed. Open a command prompt in `Cryville.Input.Unity.Android.Native` (as the working directory) and run `ndk-build` in your Android NDK.
 3. Copy the two folders in `Cryville.Input.Unity.Android.Native/libs` to the `Assets/Plugins/Android` folder in your unity project.
 
@@ -29,12 +29,13 @@ Simply copy all the contents in `Cryville.Input.Unity.Builtin` to the `Assets/Pl
 The simplest way to use the library is to construct a `SimpleInputConsumer` and check new input events periodically, typically every game tick. You need to construct an `InputManager` before constructing a `SimpleInputConsumer`, and before that, you need to call `InputManager.HandlerRegistries.Add()` for every handler types you want to use. See the following example:
 
 ```cs
+InputManager manager;
 SimpleInputConsumer consumer;
 Action<InputEvent> d_eventcb;
 void Start() {
 	InputManager.HandlerRegistries.Add(typeof(AndroidTouchHandler)); // Register AndroidTouchHandler
-	InputManager manager = new InputManager();
-	consumer = new(manager);
+	manager = new InputManager();
+	consumer = new SimpleInputConsumer(manager);
 	consumer.Activate();
 	d_eventcb = HandleInputEvent;
 }

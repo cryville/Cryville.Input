@@ -29,12 +29,13 @@
 使用本库最简单的方法是创建一个 `SimpleInputConsumer` 并周期性（通常是每个游戏刻）检查新的输入事件。创建 `SimpleInputConsumer` 前需要创建一个 `InputManager`，在那之前，需要对想要使用的输入处理器类型调用 `InputManager.HandlerRegistries.Add()`。如下面的例子所示：
 
 ```cs
+InputManager manager;
 SimpleInputConsumer consumer;
 Action<InputEvent> d_eventcb;
 void Start() {
 	InputManager.HandlerRegistries.Add(typeof(AndroidTouchHandler)); // 注册 AndroidTouchHandler
-	InputManager manager = new InputManager();
-	consumer = new(manager);
+	manager = new InputManager();
+	consumer = new SimpleInputConsumer(manager);
 	consumer.Activate();
 	d_eventcb = HandleInputEvent;
 }
