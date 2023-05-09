@@ -211,7 +211,7 @@
 			<summary>
 				获取指定类型名称的处理器。
 			</summary>
-			<param name="typeName">The type name.</param>
+			<param name="typeName">类型名称。</param>
 			<returns>
 				指定类型名称的处理器。如果没有找到或者没有初始化则返回 <see langword="null" />。
 			</returns>
