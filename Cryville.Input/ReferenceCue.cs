@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace Cryville.Input {
 	/// <summary>
@@ -107,7 +108,7 @@ namespace Cryville.Input {
 	/// <summary>
 	/// Physical dimension.
 	/// </summary>
-	public class PhysicalDimension {
+	public struct PhysicalDimension : IEquatable<PhysicalDimension> {
 		/// <summary>
 		/// The dimensions of time.
 		/// </summary>
@@ -136,6 +137,43 @@ namespace Cryville.Input {
 		/// The dimensions of luminous intensity.
 		/// </summary>
 		public int LuminousIntensity { get; set; }
+		/// <inheritdoc />
+		public bool Equals(PhysicalDimension other) =>
+			Time == other.Time &&
+			Length == other.Length &&
+			Mass == other.Mass &&
+			ElectricCurrent == other.ElectricCurrent &&
+			ThermodynamicTemperature == other.ThermodynamicTemperature &&
+			AmountOfSubstance == other.AmountOfSubstance &&
+			LuminousIntensity == other.LuminousIntensity;
+		/// <inheritdoc />
+		public override bool Equals(object obj) => obj is PhysicalDimension other && Equals(other);
+		/// <inheritdoc />
+		public override int GetHashCode() {
+			return Time | Length << 4 | Mass << 8 | ElectricCurrent << 12 | ThermodynamicTemperature << 16 | AmountOfSubstance << 20 | LuminousIntensity << 24;
+		}
+		/// <inheritdoc />
+		public override string ToString() {
+			if (Equals(default)) return "1";
+			var result = "";
+			DimensionToString(ref result, Time, 'T');
+			DimensionToString(ref result, Length, 'L');
+			DimensionToString(ref result, Mass, 'M');
+			DimensionToString(ref result, ElectricCurrent, 'I');
+			DimensionToString(ref result, ThermodynamicTemperature, '\x0398');
+			DimensionToString(ref result, AmountOfSubstance, 'N');
+			DimensionToString(ref result, LuminousIntensity, 'J');
+			return result;
+		}
+		void DimensionToString(ref string result, int dim, char sym) {
+			if (dim == 0) return;
+			if (result != "") result += "\xb7";
+			result += string.Format(CultureInfo.InvariantCulture, dim > 0 ? "{0}^{1}" : "{0}^({1})", sym, dim);
+		}
+		/// <inheritdoc />
+		public static bool operator ==(PhysicalDimension a, PhysicalDimension b) => a.Equals(b);
+		/// <inheritdoc />
+		public static bool operator !=(PhysicalDimension a, PhysicalDimension b) => !a.Equals(b);
 	}
 	/// <summary>
 	/// Relative unit.

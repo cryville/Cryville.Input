@@ -474,6 +474,24 @@
 				发光强度量纲指数。
 			</summary>
 		</member>
+		<member name="M:Cryville.Input.PhysicalDimension.Equals(Cryville.Input.PhysicalDimension)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.PhysicalDimension.Equals(System.Object)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.PhysicalDimension.GetHashCode">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.PhysicalDimension.ToString">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.PhysicalDimension.op_Equality(Cryville.Input.PhysicalDimension,Cryville.Input.PhysicalDimension)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.PhysicalDimension.op_Inequality(Cryville.Input.PhysicalDimension,Cryville.Input.PhysicalDimension)">
+			<inheritdoc />
+		</member>
 		<member name="T:Cryville.Input.RelativeUnit">
 			<summary>
 				相对单位。
