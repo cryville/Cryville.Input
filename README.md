@@ -11,7 +11,7 @@ There is no release at the moment, so you need to build the project by yourself.
 ### Building the core library
 1. Clone [Cryville.Common](https://github.com/cryville/Cryville.Common) and [Cryville.Input](https://github.com/cryville/Cryville.Input) into the same folder.
 2. Open Cryville.Common.sln in the Cryville.Common repository and build the solution.
-3. Open Cryville.Input.sln in the Cryville.Input repository and build the solution.
+3. Open Cryville.Input.sln in the Cryville.Input repository, switch to the Release configuration, and build the project Cryville.Input.
 4. The output libraries and documentations should now be in `Cryville.Input/bin/Release`.
 
 ### Setting up the core library in Unity
@@ -53,7 +53,7 @@ void HandleInputEvent(InputEvent ev) {
 - [x] Unity mouse input
 - [x] Unity touch input
 
-### Android native input (via `UnityEngine.AndroidJNIModule`)
+### Android native input (via `UnityEngine.AndroidJNIModule` or Xamarin)
 - [x] Android sensor
   - [x] Accelerometer
   - [x] Accelerometer Uncalibrated

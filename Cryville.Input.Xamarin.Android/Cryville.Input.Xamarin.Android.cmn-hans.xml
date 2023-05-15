@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<doc>
+	<assembly>
+		<name>Cryville.Input.Xamarin.Android</name>
+	</assembly>
+	<members>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidSensorHandler">
+			<summary>
+				一个处理安卓传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.#ctor(Android.App.Activity,Android.Hardware.SensorType,System.Byte)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidSensorHandler" /> 类的实例。
+			</summary>
+			<param name="activity">Activity。</param>
+			<param name="type">传感器类型。</param>
+			<param name="dimension">维度数。</param>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.Activate">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.Deactivate">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.Dispose(System.Boolean)">
+			<inheritdoc />
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidSensorHandler.IsNullable">
+			<inheritdoc />
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidSensorHandler.Dimension">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.GetTypeName(System.Int32)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.GetCurrentTimestamp">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidAccelerometerHandler">
+			<summary>
+				一个处理安卓加速度计传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidAccelerometerHandler.#ctor(Android.App.Activity)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidAccelerometerHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidAccelerometerHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidAccelerometerUncalibratedHandler">
+			<summary>
+				一个处理安卓加速度计（未校准）传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidAccelerometerUncalibratedHandler.#ctor(Android.App.Activity)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidAccelerometerUncalibratedHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidAccelerometerUncalibratedHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidGameRotationVectorHandler">
+			<summary>
+				一个处理安卓游戏用旋转矢量传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidGameRotationVectorHandler.#ctor(Android.App.Activity)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidGameRotationVectorHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidGameRotationVectorHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidGravityHandler">
+			<summary>
+				一个处理安卓重力传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidGravityHandler.#ctor(Android.App.Activity)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidGravityHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidGravityHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidGyroscopeHandler">
+			<summary>
+				一个处理安卓陀螺仪传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidGyroscopeHandler.#ctor(Android.App.Activity)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidGyroscopeHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidGyroscopeHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidGyroscopeUncalibratedHandler">
+			<summary>
+				一个处理安卓陀螺仪（未校准）传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidGyroscopeUncalibratedHandler.#ctor(Android.App.Activity)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidGyroscopeUncalibratedHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidGyroscopeUncalibratedHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidLinearAccelerationHandler">
+			<summary>
+				一个处理安卓线性加速度传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidLinearAccelerationHandler.#ctor(Android.App.Activity)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidLinearAccelerationHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidLinearAccelerationHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidMagneticFieldHandler">
+			<summary>
+				一个处理安卓磁场传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidMagneticFieldHandler.#ctor(Android.App.Activity)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidMagneticFieldHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidMagneticFieldHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidMagneticFieldUncalibratedHandler">
+			<summary>
+				一个处理安卓磁场（未校准）传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidMagneticFieldUncalibratedHandler.#ctor(Android.App.Activity)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidMagneticFieldUncalibratedHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidMagneticFieldUncalibratedHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidRotationVectorHandler">
+			<summary>
+				一个处理安卓旋转矢量传感器输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidRotationVectorHandler.#ctor(Android.App.Activity)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidRotationVectorHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidRotationVectorHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="T:Cryville.Input.Xamarin.Android.AndroidTouchHandler">
+			<summary>
+				一个处理安卓触控输入的 <see cref="T:Cryville.Input.InputHandler" />。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.#ctor(Android.Views.View)">
+			<summary>
+				创建一个 <see cref="T:Cryville.Input.Xamarin.Android.AndroidTouchHandler" /> 类的实例。
+			</summary>
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.Activate">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.Deactivate">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.Dispose(System.Boolean)">
+			<inheritdoc />
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidTouchHandler.IsNullable">
+			<inheritdoc />
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidTouchHandler.Dimension">
+			<inheritdoc />
+		</member>
+		<member name="P:Cryville.Input.Xamarin.Android.AndroidTouchHandler.ReferenceCue">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.GetTypeName(System.Int32)">
+			<inheritdoc />
+		</member>
+		<member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.GetCurrentTimestamp">
+			<inheritdoc />
+		</member>
+	</members>
+</doc>

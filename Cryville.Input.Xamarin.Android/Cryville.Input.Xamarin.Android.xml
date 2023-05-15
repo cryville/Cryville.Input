@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cryville.Input.Xamarin.Android</name>
+    </assembly>
+    <members>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidSensorHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.#ctor(Android.App.Activity,Android.Hardware.SensorType,System.Byte)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidSensorHandler" /> class.
+            </summary>
+            <param name="activity">The activity.</param>
+            <param name="type">The sensor type.</param>
+            <param name="dimension">The dimension.</param>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.Activate">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.Deactivate">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidSensorHandler.IsNullable">
+            <inheritdoc />
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidSensorHandler.Dimension">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.GetTypeName(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidSensorHandler.GetCurrentTimestamp">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidAccelerometerHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android accelerometer sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidAccelerometerHandler.#ctor(Android.App.Activity)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidAccelerometerHandler" /> class.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidAccelerometerHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidAccelerometerUncalibratedHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android accelerometer (uncalibrated) sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidAccelerometerUncalibratedHandler.#ctor(Android.App.Activity)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidAccelerometerUncalibratedHandler" /> class.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidAccelerometerUncalibratedHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidGameRotationVectorHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android game rotation vector sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidGameRotationVectorHandler.#ctor(Android.App.Activity)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidGameRotationVectorHandler" /> class.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidGameRotationVectorHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidGravityHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android gravity sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidGravityHandler.#ctor(Android.App.Activity)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidGravityHandler" /> class.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidGravityHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidGyroscopeHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android gyroscope sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidGyroscopeHandler.#ctor(Android.App.Activity)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidGyroscopeHandler" /> class.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidGyroscopeHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidGyroscopeUncalibratedHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android gyroscope (uncalibrated) sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidGyroscopeUncalibratedHandler.#ctor(Android.App.Activity)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidGyroscopeUncalibratedHandler" /> class.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidGyroscopeUncalibratedHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidLinearAccelerationHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android linear acceleration sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidLinearAccelerationHandler.#ctor(Android.App.Activity)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidLinearAccelerationHandler" /> class.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidLinearAccelerationHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidMagneticFieldHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android magnetic field sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidMagneticFieldHandler.#ctor(Android.App.Activity)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidMagneticFieldHandler" /> class.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidMagneticFieldHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidMagneticFieldUncalibratedHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android magnetic field (uncalibrated) sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidMagneticFieldUncalibratedHandler.#ctor(Android.App.Activity)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidMagneticFieldUncalibratedHandler" /> class.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidMagneticFieldUncalibratedHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidRotationVectorHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android rotation vector sensor input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidRotationVectorHandler.#ctor(Android.App.Activity)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidRotationVectorHandler" /> class.
+            </summary>
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidRotationVectorHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="T:Cryville.Input.Xamarin.Android.AndroidTouchHandler">
+            <summary>
+            An <see cref="T:Cryville.Input.InputHandler" /> that handles Android touch input.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.#ctor(Android.Views.View)">
+            <summary>
+            Creates an instance of the <see cref="T:Cryville.Input.Xamarin.Android.AndroidTouchHandler" /> class.
+            </summary>
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.Activate">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.Deactivate">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidTouchHandler.IsNullable">
+            <inheritdoc />
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidTouchHandler.Dimension">
+            <inheritdoc />
+        </member>
+        <member name="P:Cryville.Input.Xamarin.Android.AndroidTouchHandler.ReferenceCue">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.GetTypeName(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cryville.Input.Xamarin.Android.AndroidTouchHandler.GetCurrentTimestamp">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

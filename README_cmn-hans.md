@@ -11,7 +11,7 @@
 ### 构建核心库
 1. 将 [Cryville.Common](https://github.com/cryville/Cryville.Common) 和 [Cryville.Input](https://github.com/cryville/Cryville.Input) 克隆至同一文件夹。
 2. 打开 Cryville.Common 仓库内的 Cryville.Common.sln 并构建解决方案。
-3. 打开 Cryville.Input 仓库内的 Cryville.Input.sln 并构建解决方案。
+3. 打开 Cryville.Input 仓库内的 Cryville.Input.sln，切换到 Release 配置，并构建项目 Cryville.Input。
 4. 输出的库和文档可以在 `Cryville.Input/bin/Release` 找到。
 
 ### 在 Unity 中配置核心库
@@ -53,7 +53,7 @@ void HandleInputEvent(InputEvent ev) {
 - [x] Unity 鼠标输入
 - [x] Unity 触控输入
 
-### Android 本地输入（通过 `UnityEngine.AndroidJNIModule`）
+### Android 本地输入（通过 `UnityEngine.AndroidJNIModule` 或 Xamarin）
 - [x] Android 传感器
   - [x] 加速度计
   - [x] 未校准的加速度计

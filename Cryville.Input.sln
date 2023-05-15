@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cryville.Input.Unity.Builti
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cryville.Input.Unity.Android.Native", "Cryville.Input.Unity.Android.Native\Cryville.Input.Unity.Android.Native.vcxproj", "{2666880C-6EBB-4B2C-B2A0-44AA2618C7FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryville.Input.Xamarin.Android", "Cryville.Input.Xamarin.Android\Cryville.Input.Xamarin.Android.csproj", "{93618118-DCA8-4EE0-8ADA-07C35B88C032}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,26 @@ Global
 		{2666880C-6EBB-4B2C-B2A0-44AA2618C7FB}.Release|x86.ActiveCfg = Release|x86
 		{2666880C-6EBB-4B2C-B2A0-44AA2618C7FB}.Release|x86.Build.0 = Release|x86
 		{2666880C-6EBB-4B2C-B2A0-44AA2618C7FB}.Release|x86.Deploy.0 = Release|x86
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Debug|ARM.Build.0 = Debug|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Debug|x64.Build.0 = Debug|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Debug|x86.Build.0 = Debug|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Release|ARM.ActiveCfg = Release|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Release|ARM.Build.0 = Release|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Release|ARM64.Build.0 = Release|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Release|x64.ActiveCfg = Release|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Release|x64.Build.0 = Release|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Release|x86.ActiveCfg = Release|Any CPU
+		{93618118-DCA8-4EE0-8ADA-07C35B88C032}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
