@@ -121,6 +121,20 @@ namespace Cryville.Input.Unity.Android {
 		public override ReferenceCue ReferenceCue => _refCue;
 	}
 	/// <summary>
+	/// An <see cref="InputHandler" /> that handles Android gyroscope (uncalibrated) sensor input.
+	/// </summary>
+	public class AndroidGyroscopeUncalibratedHandler : AndroidSensorHandler {
+		/// <summary>
+		/// Creates an instance of the <see cref="AndroidGyroscopeUncalibratedHandler" /> class.
+		/// </summary>
+		public AndroidGyroscopeUncalibratedHandler() : base("GyroscopeUncalibrated", 3) { }
+		static readonly ReferenceCue _refCue = new ReferenceCue {
+			PhysicalDimension = new PhysicalDimension { Time = -1 },
+		};
+		/// <inheritdoc />
+		public override ReferenceCue ReferenceCue => _refCue;
+	}
+	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android linear acceleration sensor input.
 	/// </summary>
 	public class AndroidLinearAccelerationHandler : AndroidSensorHandler {
