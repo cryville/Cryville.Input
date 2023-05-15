@@ -12,7 +12,7 @@ namespace Cryville.Input {
 		/// <summary>
 		/// A set of handler types to be initialized.
 		/// </summary>
-		public static readonly HashSet<Type> HandlerRegistries = new HashSet<Type> { };
+		public static readonly Dictionary<Type, object[]> HandlerRegistries = new Dictionary<Type, object[]>();
 		readonly HashSet<InputHandler> _handlers = new HashSet<InputHandler>();
 		readonly Dictionary<Type, InputHandler> _typeMap = new Dictionary<Type, InputHandler>();
 		/// <summary>
@@ -21,14 +21,14 @@ namespace Cryville.Input {
 		public InputManager() {
 			foreach (var t in HandlerRegistries) {
 				try {
-					if (!typeof(InputHandler).IsAssignableFrom(t)) continue;
-					var h = (InputHandler)Activator.CreateInstance(t);
-					_typeMap.Add(t, h);
+					if (!typeof(InputHandler).IsAssignableFrom(t.Key)) continue;
+					var h = (InputHandler)Activator.CreateInstance(t.Key, t.Value);
+					_typeMap.Add(t.Key, h);
 					_handlers.Add(h);
-					Logger.Log("main", 1, "Input", "Initialized {0}", TypeNameHelper.GetSimpleName(t));
+					Logger.Log("main", 1, "Input", "Initialized {0}", TypeNameHelper.GetSimpleName(t.Key));
 				}
 				catch (TargetInvocationException ex) {
-					Logger.Log("main", 3, "Input", "Cannot initialize {0}: {1}", TypeNameHelper.GetSimpleName(t), ex.InnerException);
+					Logger.Log("main", 3, "Input", "Cannot initialize {0}: {1}", TypeNameHelper.GetSimpleName(t.Key), ex.InnerException);
 				}
 			}
 		}
