@@ -33,7 +33,7 @@ InputManager manager;
 SimpleInputConsumer consumer;
 Action<InputEvent> d_eventcb;
 void Start() {
-	InputManager.HandlerRegistries.Add(typeof(AndroidTouchHandler)); // 注册 AndroidTouchHandler
+	InputManager.HandlerRegistries.Add(typeof(AndroidTouchHandler), new object[0]); // 注册 AndroidTouchHandler
 	manager = new InputManager();
 	consumer = new SimpleInputConsumer(manager);
 	consumer.Activate();
@@ -59,14 +59,15 @@ void HandleInputEvent(InputEvent ev) {
   - [x] 未校准的加速度计
   - [ ] 环境温度
   - [ ] 地磁旋转矢量
-  - [x] 重力计
+  - [x] 重力
   - [x] 陀螺仪
+  - [x] 未校准的陀螺仪
   - [ ] 心跳
   - [ ] 心率
   - [ ] 光照
-  - [x] 线性加速度计
-  - [x] 磁场计
-  - [x] 未校准的磁场计
+  - [x] 线性加速度
+  - [x] 磁场
+  - [x] 未校准的磁场
   - [ ] 压力
   - [ ] 距离
   - [ ] 相对湿度

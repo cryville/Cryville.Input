@@ -185,12 +185,12 @@
         </member>
         <member name="F:Cryville.Input.InputManager.HandlerRegistries">
             <summary>
-            A set of handler types to be initialized.
+            A map of handler types to lists of parameters to be initialized.
             </summary>
         </member>
         <member name="M:Cryville.Input.InputManager.#ctor">
             <summary>
-            Creates an instance of the <see cref="T:Cryville.Input.InputManager" /> class and tries to initialize all the handlers in <see cref="F:Cryville.Input.InputManager.HandlerRegistries" />.
+            Creates an instance of the <see cref="T:Cryville.Input.InputManager" /> class and tries to initialize all the handlers with their corresponding parameters in <see cref="F:Cryville.Input.InputManager.HandlerRegistries" />.
             </summary>
         </member>
         <member name="M:Cryville.Input.InputManager.GetHandlerByTypeName(System.String)">

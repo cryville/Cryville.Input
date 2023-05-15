@@ -33,7 +33,7 @@ InputManager manager;
 SimpleInputConsumer consumer;
 Action<InputEvent> d_eventcb;
 void Start() {
-	InputManager.HandlerRegistries.Add(typeof(AndroidTouchHandler)); // Register AndroidTouchHandler
+	InputManager.HandlerRegistries.Add(typeof(AndroidTouchHandler), new object[0]); // Register AndroidTouchHandler
 	manager = new InputManager();
 	consumer = new SimpleInputConsumer(manager);
 	consumer.Activate();
@@ -61,6 +61,7 @@ void HandleInputEvent(InputEvent ev) {
   - [ ] Geomagnetic Rotation Vector
   - [x] Gravity
   - [x] Gyroscope
+  - [x] Gyroscope Uncalibrated
   - [ ] Heart Beat
   - [ ] Heart Rate
   - [ ] Light

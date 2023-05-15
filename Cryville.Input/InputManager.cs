@@ -10,13 +10,13 @@ namespace Cryville.Input {
 	/// </summary>
 	public class InputManager {
 		/// <summary>
-		/// A set of handler types to be initialized.
+		/// A map of handler types to lists of parameters to be initialized.
 		/// </summary>
 		public static readonly Dictionary<Type, object[]> HandlerRegistries = new Dictionary<Type, object[]>();
 		readonly HashSet<InputHandler> _handlers = new HashSet<InputHandler>();
 		readonly Dictionary<Type, InputHandler> _typeMap = new Dictionary<Type, InputHandler>();
 		/// <summary>
-		/// Creates an instance of the <see cref="InputManager" /> class and tries to initialize all the handlers in <see cref="HandlerRegistries" />.
+		/// Creates an instance of the <see cref="InputManager" /> class and tries to initialize all the handlers with their corresponding parameters in <see cref="HandlerRegistries" />.
 		/// </summary>
 		public InputManager() {
 			foreach (var t in HandlerRegistries) {

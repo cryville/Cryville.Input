@@ -199,12 +199,12 @@
 		</member>
 		<member name="F:Cryville.Input.InputManager.HandlerRegistries">
 			<summary>
-				要初始化的处理器类型的集合。
+				要初始化的处理器类型及其参数列表的表。
 			</summary>
 		</member>
 		<member name="M:Cryville.Input.InputManager.#ctor">
 			<summary>
-				创建一个 <see cref="T:Cryville.Input.InputManager" /> 类的实例，并尝试初始化 <see cref="F:Cryville.Input.InputManager.HandlerRegistries" /> 中的所有处理器。
+				创建一个 <see cref="T:Cryville.Input.InputManager" /> 类的实例，并尝试用对应的参数初始化 <see cref="F:Cryville.Input.InputManager.HandlerRegistries" /> 中的所有处理器。
 			</summary>
 		</member>
 		<member name="M:Cryville.Input.InputManager.GetHandlerByTypeName(System.String)">
