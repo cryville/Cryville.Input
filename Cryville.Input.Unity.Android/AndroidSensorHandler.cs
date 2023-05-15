@@ -8,7 +8,7 @@ namespace Cryville.Input.Unity.Android {
 	/// </summary>
 	public abstract class AndroidSensorHandler : AndroidInputHandler {
 		/// <summary>
-		/// Creates an instance of the <see cref="AndroidSensorHandler{TSelf}" /> class.
+		/// Creates an instance of the <see cref="AndroidSensorHandler" /> class.
 		/// </summary>
 		/// <param name="typeName">The name of the Java class nested in <c>world/cryville/input/unity/android/SensorProxy</c> that performs the low-level jobs.</param>
 		/// <param name="dimension">The dimension.</param>
