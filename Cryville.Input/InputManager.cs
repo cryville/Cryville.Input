@@ -28,7 +28,10 @@ namespace Cryville.Input {
 					Logger.Log("main", 1, "Input", "Initialized {0}", TypeNameHelper.GetSimpleName(t.Key));
 				}
 				catch (TargetInvocationException ex) {
-					Logger.Log("main", 3, "Input", "Cannot initialize {0}: {1}", TypeNameHelper.GetSimpleName(t.Key), ex.InnerException);
+					if (ex.InnerException is NotSupportedException)
+						Logger.Log("main", 3, "Input", "Attempted to initialize {0}: {1}", TypeNameHelper.GetSimpleName(t.Key), ex.InnerException?.Message);
+					else
+						Logger.Log("main", 3, "Input", "An error occurred while initializing {0}: {1}", TypeNameHelper.GetSimpleName(t.Key), ex.InnerException);
 				}
 			}
 		}
