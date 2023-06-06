@@ -97,11 +97,7 @@ namespace Cryville.Input.Unity {
 			useGUILayout = false;
 		}
 		void Update() {
-			double time = Time.realtimeSinceStartupAsDouble;
-			foreach (var k in ActiveKeys) {
-				Feed(k, 0, new InputFrame(time, new InputVector()));
-			}
-			Batch(time);
+			Batch(Time.realtimeSinceStartupAsDouble);
 		}
 	}
 
