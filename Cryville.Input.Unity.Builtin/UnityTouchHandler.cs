@@ -14,9 +14,11 @@ namespace Cryville.Input.Unity {
 		/// </summary>
 		/// <exception cref="NotSupportedException">Unity touch is not supported on the current device.</exception>
 		public UnityTouchHandler() {
+#if !UNITY_EDITOR // In the simulator, touch works but `touchSupported` returns false (by 2021.3)
 			if (!unity::Input.touchSupported) {
 				throw new NotSupportedException("Unity touch is not supported on this device");
 			}
+#endif
 		}
 
 		/// <inheritdoc />
