@@ -1,3 +1,16 @@
 {
-	"name": "Cryville.Input.Unity.Android"
+    "name": "Cryville.Input.Unity.Android",
+    "rootNamespace": "Cryville.Input.Unity.Android",
+    "references": [],
+    "includePlatforms": [
+        "Android"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
