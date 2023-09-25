@@ -258,7 +258,7 @@
             </summary>
             <remarks>
             <para>An input frame with this property set to <see langword="true" /> marks the end of life of an input ID (see <see cref="P:Cryville.Input.InputIdentifier.Id" />.) This usually occurs when, for example, the button of the device is released.</para>
-            <para>When this property is set to <see langword="true" />, all the components of <see cref="P:Cryville.Input.InputFrame.Vector" /> is meaningless and should be set to 0.</para>
+            <para>When this property is set to <see langword="true" />, all the components of <see cref="P:Cryville.Input.InputFrame.Vector" /> are meaningless and should be set to 0.</para>
             </remarks>
         </member>
         <member name="P:Cryville.Input.InputFrame.Vector">
