@@ -1,4 +1,3 @@
-using Cryville.Common.Logging;
 using System;
 
 namespace Cryville.Input.Unity.Android {
@@ -52,7 +51,7 @@ namespace Cryville.Input.Unity.Android {
 				}
 			}
 			catch (Exception ex) {
-				Logger.Log("main", 4, "Input", "An error occurred while handling an Android touch event: {0}", ex);
+				Shared.Logger.Log(4, "Input", "An error occurred while handling an Android touch event: {0}", ex);
 			}
 		}
 	}

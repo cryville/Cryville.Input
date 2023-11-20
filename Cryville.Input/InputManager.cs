@@ -1,4 +1,3 @@
-using Cryville.Common.Logging;
 using Cryville.Common.Reflection;
 using System;
 using System.Collections.Generic;
@@ -25,13 +24,13 @@ namespace Cryville.Input {
 					var h = (InputHandler)Activator.CreateInstance(t.Key, t.Value);
 					_typeMap.Add(t.Key, h);
 					_handlers.Add(h);
-					Logger.Log("main", 1, "Input", "Initialized {0}", TypeNameHelper.GetSimpleName(t.Key));
+					Shared.Logger.Log(1, "Input", "Initialized {0}", TypeNameHelper.GetSimpleName(t.Key));
 				}
 				catch (TargetInvocationException ex) {
 					if (ex.InnerException is NotSupportedException)
-						Logger.Log("main", 3, "Input", "Attempted to initialize {0}: {1}", TypeNameHelper.GetSimpleName(t.Key), ex.InnerException?.Message);
+						Shared.Logger.Log(3, "Input", "Attempted to initialize {0}: {1}", TypeNameHelper.GetSimpleName(t.Key), ex.InnerException?.Message);
 					else
-						Logger.Log("main", 3, "Input", "An error occurred while initializing {0}: {1}", TypeNameHelper.GetSimpleName(t.Key), ex.InnerException);
+						Shared.Logger.Log(3, "Input", "An error occurred while initializing {0}: {1}", TypeNameHelper.GetSimpleName(t.Key), ex.InnerException);
 				}
 			}
 		}

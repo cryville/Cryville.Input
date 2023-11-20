@@ -537,6 +537,16 @@
 				反转 W 轴。
 			</summary>
 		</member>
+		<member name="T:Cryville.Input.Shared">
+			<summary>
+				库的共享对象。
+			</summary>
+		</member>
+		<member name="F:Cryville.Input.Shared.Logger">
+			<summary>
+				主日志记录器。
+			</summary>
+		</member>
 		<member name="T:Cryville.Input.SimpleInputConsumer">
 			<summary>
 				一个接收输入帧的简易输入接收器。

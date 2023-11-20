@@ -60,10 +60,11 @@
     <Compile Include="InputVector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceCue.cs" />
+    <Compile Include="Shared.cs" />
     <Compile Include="SimpleInputConsumer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Cryville.Input.cmn-hans.xml">
+    <Content Include="Cryville.Input-zh.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Cryville.Input.xml">

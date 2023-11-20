@@ -515,6 +515,16 @@
             The W axis is flipped.
             </summary>
         </member>
+        <member name="T:Cryville.Input.Shared">
+            <summary>
+            Shared objects of the library.
+            </summary>
+        </member>
+        <member name="F:Cryville.Input.Shared.Logger">
+            <summary>
+            The main logger.
+            </summary>
+        </member>
         <member name="T:Cryville.Input.SimpleInputConsumer">
             <summary>
             A simple input consumer that receives input frames.

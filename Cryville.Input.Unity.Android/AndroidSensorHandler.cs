@@ -1,4 +1,3 @@
-using Cryville.Common.Logging;
 using System;
 using System.Text.RegularExpressions;
 
@@ -45,7 +44,7 @@ namespace Cryville.Input.Unity.Android {
 				Batch(timeSecs);
 			}
 			catch (Exception ex) {
-				Logger.Log("main", 4, "Input", "An error occurred while handling an Android sensor event: {0}", ex);
+				Shared.Logger.Log(4, "Input", "An error occurred while handling an Android sensor event: {0}", ex);
 			}
 		}
 	}
