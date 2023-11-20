@@ -5,7 +5,13 @@ namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android input.
 	/// </summary>
-	public abstract class AndroidInputHandler : InputHandler {
+	/// <typeparam name="TSelf">The type that inherits this class.</typeparam>
+	public abstract class AndroidInputHandler<TSelf> : InputHandler where TSelf : AndroidInputHandler<TSelf> {
+		/// <summary>
+		/// The instance of this class.
+		/// </summary>
+		protected static TSelf Instance { get; private set; }
+
 		readonly IntPtr _t_T;
 		static readonly jvalue[] _p_void = new jvalue[0];
 		readonly IntPtr _i_T;
@@ -22,8 +28,11 @@ namespace Cryville.Input.Unity.Android {
 		/// <exception cref="InvalidOperationException">An instance of this class have already been created.</exception>
 		/// <exception cref="NotSupportedException">Android input is not supported on the current device.</exception>
 		public AndroidInputHandler(string className) {
+			if (Instance != null)
+				throw new InvalidOperationException("AndroidInputHandler already created");
 			if (Environment.OSVersion.Platform != PlatformID.Unix)
 				throw new NotSupportedException("Android input is not supported on this device");
+			Instance = (TSelf)this;
 
 			JavaStaticMethods.Init();
 
@@ -40,7 +49,10 @@ namespace Cryville.Input.Unity.Android {
 			_m_T_activate = AndroidJNI.GetMethodID(_t_T, "activate", "()V");
 			_m_T_deactivate = AndroidJNI.GetMethodID(_t_T, "deactivate", "()V");
 
-			AndroidInputPoller.Instance.Register(AndroidJNI.CallIntMethod(_i_T, _m_T_getId, _p_void), this);
+			NativeMethods.AndroidInputProxy_RegisterCallback(
+				AndroidJNI.CallIntMethod(_i_T, _m_T_getId, _p_void),
+				Callback
+			);
 		}
 
 		/// <inheritdoc />
@@ -66,6 +78,6 @@ namespace Cryville.Input.Unity.Android {
 			}
 		}
 
-		internal abstract void OnFeed(int id, int action, long time, float x, float y, float z, float w);
+		private protected abstract AndroidInputProxy_Callback Callback { get; }
 	}
 }

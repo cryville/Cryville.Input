@@ -1,10 +1,12 @@
+using Cryville.Common.Interop;
+using Cryville.Common.Logging;
 using System;
 
 namespace Cryville.Input.Unity.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android touch input.
 	/// </summary>
-	public class AndroidTouchHandler : AndroidInputHandler {
+	public class AndroidTouchHandler : AndroidInputHandler<AndroidTouchHandler> {
 		/// <summary>
 		/// Creates an instance of the <see cref="AndroidTouchHandler" /> class.
 		/// </summary>
@@ -38,16 +40,19 @@ namespace Cryville.Input.Unity.Android {
 			return JavaStaticMethods.SystemClock_uptimeMillis() / 1000.0;
 		}
 
-		internal override void OnFeed(int id, int action, long time, float x, float y, float z, float w) {
+		private protected override AndroidInputProxy_Callback Callback { get { return OnFeed; } }
+
+		[MonoPInvokeCallback]
+		static void OnFeed(int id, int action, long time, float x, float y, float z, float w) {
 			try {
 				double timeSecs = time / 1000.0;
 				if (action == -2) {
-					Batch(timeSecs);
+					Instance.Batch(timeSecs);
 				}
 				else {
-					Feed(0, id, new InputFrame(timeSecs, new InputVector(x, y)));
+					Instance.Feed(0, id, new InputFrame(timeSecs, new InputVector(x, y)));
 					if (action == 1 /*ACTION_UP*/ || action == 3 /*ACTION_CANCEL*/ || action == 6 /*ACTION_POINTER_UP*/)
-						Feed(0, id, new InputFrame(timeSecs));
+						Instance.Feed(0, id, new InputFrame(timeSecs));
 				}
 			}
 			catch (Exception ex) {
