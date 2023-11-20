@@ -1,5 +1,4 @@
 using Cryville.Common.Interop;
-using Cryville.Common.Logging;
 using System;
 using System.Text.RegularExpressions;
 
