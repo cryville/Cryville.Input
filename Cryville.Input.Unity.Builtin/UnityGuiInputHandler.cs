@@ -8,16 +8,13 @@ namespace Cryville.Input.Unity {
 	/// </summary>
 	/// <typeparam name="T">The GUI event receiver type.</typeparam>
 	public class UnityGuiInputHandler<T> : InputHandler where T : UnityGuiEventReceiver {
-		GameObject _receiver;
-		T _recvComp;
+		readonly GameObject _receiver;
+		readonly T _recvComp;
 
 		/// <summary>
 		/// Creates an instance of the <see cref="UnityGuiInputHandler{T}" /> class.
 		/// </summary>
-		public UnityGuiInputHandler() { }
-
-		/// <inheritdoc />
-		protected override void Activate() {
+		public UnityGuiInputHandler() {
 			_receiver = new GameObject("__guiRecv__");
 			_recvComp = _receiver.AddComponent<T>();
 			_recvComp.SetFeedCallback(Feed);
@@ -25,8 +22,13 @@ namespace Cryville.Input.Unity {
 		}
 
 		/// <inheritdoc />
+		protected override void Activate() {
+			_recvComp.enabled = true;
+		}
+
+		/// <inheritdoc />
 		protected override void Deactivate() {
-			if (_receiver) GameObject.Destroy(_receiver);
+			if (_recvComp) _recvComp.enabled = false;
 		}
 
 		/// <inheritdoc />
