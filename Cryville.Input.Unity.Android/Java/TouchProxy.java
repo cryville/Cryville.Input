@@ -19,8 +19,8 @@ public final class TouchProxy extends Proxy implements View.OnTouchListener {
 		}
 		else {
 			// Unity 6 or later
-			Method getSurfaceViewMethod = player.getClass().getMethod("getSurfaceView");
-			View view = (View)getSurfaceViewMethod.invoke(player);
+			Method getViewMethod = player.getClass().getMethod("getFrameLayout");
+			View view = (View)getViewMethod.invoke(player);
 			view.setOnTouchListener(this);
 		}
 	}
