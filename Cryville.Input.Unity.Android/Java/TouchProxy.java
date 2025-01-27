@@ -43,6 +43,22 @@ public final class TouchProxy extends Proxy implements View.OnTouchListener {
 		int pointerCount = event.getPointerCount();
 		int action = event.getActionMasked();
 		int actionIndex = event.getActionIndex();
+
+		int historySize = event.getHistorySize();
+		for (int h = 0; h < historySize; h++) {
+			long htime = event.getHistoricalEventTime(h);
+			for (int i = 0; i < pointerCount; i++) {
+				int id = event.getPointerId(i);
+				float x = event.getHistoricalX(i, h);
+				float y = event.getHistoricalY(i, h);
+				if (action == 5 || action == 6) {
+					feed(id, i == actionIndex ? action : -1, htime, x, y);
+				}
+				else {
+					feed(id, action, htime, x, y);
+				}
+			}
+		}
 		long time = event.getEventTime();
 		for (int i = 0; i < pointerCount; i++) {
 			int id = event.getPointerId(i);

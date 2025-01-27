@@ -75,22 +75,42 @@ namespace Cryville.Input.Xamarin.Android {
 				int pointerCount = e.PointerCount;
 				var action = e.ActionMasked;
 				int actionIndex = e.ActionIndex;
+
+				int historySize = e.HistorySize;
+				for (int h = 0; h < historySize; h++) {
+					long htime = e.GetHistoricalEventTime(h);
+					for (int i = 0; i < pointerCount; i++) {
+						int id = e.GetPointerId(i);
+						float x = e.GetHistoricalX(i, h);
+						float y = e.GetHistoricalY(i, h);
+						if (action == MotionEventActions.PointerDown || action == MotionEventActions.PointerUp) {
+							Feed(i == actionIndex ? action : MotionEventActions.Move, actionIndex, htime, i, id, x, y);
+						}
+						else {
+							Feed(action, actionIndex, htime, i, id, x, y);
+						}
+					}
+				}
 				double time = e.EventTime / 1e3;
 				for (int i = 0; i < pointerCount; i++) {
 					int id = e.GetPointerId(i);
 					float x = e.GetX(i);
 					float y = e.GetY(i);
-					_handler.Feed(0, id, new InputFrame(time, new InputVector(x, y)));
-					if (
-						action == MotionEventActions.Up ||
-						action == MotionEventActions.Cancel ||
-						(action == MotionEventActions.PointerUp && i == actionIndex)
-					) {
-						_handler.Feed(0, id, new InputFrame(time));
-					}
+					Feed(action, actionIndex, time, i, id, x, y);
 				}
 				_handler.Batch(time);
 				return false;
+			}
+
+			void Feed(MotionEventActions action, int actionIndex, double time, int i, int id, float x, float y) {
+				_handler.Feed(0, id, new(time, new(x, y)));
+				if (
+					action == MotionEventActions.Up ||
+					action == MotionEventActions.Cancel ||
+					(action == MotionEventActions.PointerUp && i == actionIndex)
+				) {
+					_handler.Feed(0, id, new(time));
+				}
 			}
 		}
 	}
