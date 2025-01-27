@@ -1,10 +1,8 @@
-using System;
-
 namespace Cryville.Input {
 	/// <summary>
 	/// Input identifier.
 	/// </summary>
-	public struct InputIdentifier : IEquatable<InputIdentifier> {
+	public record struct InputIdentifier {
 		/// <summary>
 		/// The input source.
 		/// </summary>
@@ -17,29 +15,6 @@ namespace Cryville.Input {
 		/// </remarks>
 		public int Id { get; set; }
 		/// <inheritdoc />
-		public override bool Equals(object obj) {
-			if (obj == null || !(obj is InputIdentifier)) return false;
-			return Equals((InputIdentifier)obj);
-		}
-		/// <inheritdoc />
-		public bool Equals(InputIdentifier other) {
-			return Source == other.Source && Id == other.Id;
-		}
-		/// <inheritdoc />
-		public override int GetHashCode() {
-			return Source.GetHashCode() ^ ((Id << 16) | (Id >> 16));
-		}
-		/// <inheritdoc />
-		public override string ToString() {
-			return string.Format("{0},{1}", Source, Id);
-		}
-		/// <inheritdoc />
-		public static bool operator ==(InputIdentifier lhs, InputIdentifier rhs) {
-			return lhs.Equals(rhs);
-		}
-		/// <inheritdoc />
-		public static bool operator !=(InputIdentifier lhs, InputIdentifier rhs) {
-			return !lhs.Equals(rhs);
-		}
+		public override readonly string ToString() => $"{Source},{Id}";
 	}
 }

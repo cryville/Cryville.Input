@@ -8,6 +8,6 @@ namespace Cryville.Input {
 		/// <summary>
 		/// The main logger.
 		/// </summary>
-		public static readonly Logger Logger = new Logger();
+		public static readonly Logger Logger = new();
 	}
 }

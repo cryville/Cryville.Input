@@ -6,17 +6,18 @@ using Android.Runtime;
 using Java.Lang;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
 
 namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android sensor input.
 	/// </summary>
-	public abstract class AndroidSensorHandler : InputHandler {
+	public abstract partial class AndroidSensorHandler : InputHandler {
 		static SensorManager _manager;
 
 		readonly InternalListener _listener;
-		readonly Dictionary<Sensor, int> _sensors = new Dictionary<Sensor, int>();
+		readonly Dictionary<Sensor, int> _sensors = [];
 		readonly IList<Sensor> _candidateSensors;
 
 		/// <summary>
@@ -25,16 +26,21 @@ namespace Cryville.Input.Xamarin.Android {
 		/// <param name="activity">The activity.</param>
 		/// <param name="type">The sensor type.</param>
 		/// <param name="dimension">The dimension.</param>
-		public AndroidSensorHandler(Activity activity, SensorType type, byte dimension) {
+		protected AndroidSensorHandler(Activity activity, SensorType type, byte dimension) {
+			ArgumentNullException.ThrowIfNull(activity);
+
 			if (dimension < 0 || dimension > 4) throw new ArgumentOutOfRangeException(nameof(dimension));
 			_manager ??= (SensorManager)activity.GetSystemService(Context.SensorService);
-			m_typeName = Regex.Replace(type.ToString(), @"(?<=[a-z])(?=[A-Z])", " ");
+			m_typeName = WordBoundaryRegex().Replace(type.ToString(), " ");
 			m_dimension = dimension;
 			_listener = new InternalListener(this);
 
 			_candidateSensors = _manager.GetSensorList(type);
 			if (_candidateSensors.Count == 0) throw new IllegalStateException("Sensor not found");
 		}
+
+		[GeneratedRegex(@"(?<=[a-z])(?=[A-Z])")]
+		private static partial Regex WordBoundaryRegex();
 
 		/// <inheritdoc />
 		protected override void Activate() {
@@ -53,9 +59,10 @@ namespace Cryville.Input.Xamarin.Android {
 		}
 
 		/// <inheritdoc />
-		public override void Dispose(bool disposing) {
+		protected override void Dispose(bool disposing) {
 			if (disposing) {
 				Deactivate();
+				_listener.Dispose();
 			}
 		}
 
@@ -78,27 +85,21 @@ namespace Cryville.Input.Xamarin.Android {
 			return SystemClock.ElapsedRealtimeNanos() / 1e9;
 		}
 
-		class InternalListener : Java.Lang.Object, ISensorEventListener {
-			readonly AndroidSensorHandler _handler;
-
-			public InternalListener(AndroidSensorHandler handler) {
-				_handler = handler;
-			}
-
+		sealed class InternalListener(AndroidSensorHandler handler) : Java.Lang.Object, ISensorEventListener {
 			public void OnAccuracyChanged(Sensor sensor, [GeneratedEnum] SensorStatus accuracy) { }
 
 			public void OnSensorChanged(SensorEvent e) {
-				if (!_handler._sensors.TryGetValue(e.Sensor, out int id)) return;
+				if (!handler._sensors.TryGetValue(e.Sensor, out int id)) return;
 				IList<float> v = e.Values;
 				double time = e.Timestamp / 1e9;
-				switch (_handler.m_dimension) {
-					case 0: _handler.Feed(0, id, new InputFrame(time)); break;
-					case 1: _handler.Feed(0, id, new InputFrame(time, new InputVector(v[0]))); break;
-					case 2: _handler.Feed(0, id, new InputFrame(time, new InputVector(v[0], v[1]))); break;
-					case 3: _handler.Feed(0, id, new InputFrame(time, new InputVector(v[0], v[1], v[2]))); break;
-					case 4: _handler.Feed(0, id, new InputFrame(time, new InputVector(v[0], v[1], v[2], v[3]))); break;
+				switch (handler.m_dimension) {
+					case 0: handler.Feed(0, id, new InputFrame(time)); break;
+					case 1: handler.Feed(0, id, new InputFrame(time, new InputVector(v[0]))); break;
+					case 2: handler.Feed(0, id, new InputFrame(time, new InputVector(v[0], v[1]))); break;
+					case 3: handler.Feed(0, id, new InputFrame(time, new InputVector(v[0], v[1], v[2]))); break;
+					case 4: handler.Feed(0, id, new InputFrame(time, new InputVector(v[0], v[1], v[2], v[3]))); break;
 				}
-				_handler.Batch(time);
+				handler.Batch(time);
 			}
 		}
 	}
@@ -106,12 +107,8 @@ namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android accelerometer sensor input.
 	/// </summary>
-	public class AndroidAccelerometerHandler : AndroidSensorHandler {
-		/// <summary>
-		/// Creates an instance of the <see cref="AndroidAccelerometerHandler" /> class.
-		/// </summary>
-		public AndroidAccelerometerHandler(Activity activity) : base(activity, SensorType.Accelerometer, 3) { }
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+	public class AndroidAccelerometerHandler(Activity activity) : AndroidSensorHandler(activity, SensorType.Accelerometer, 3) {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension { Length = 1, Time = -2 },
 		};
 		/// <inheritdoc />
@@ -120,12 +117,9 @@ namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android accelerometer (uncalibrated) sensor input.
 	/// </summary>
-	public class AndroidAccelerometerUncalibratedHandler : AndroidSensorHandler {
-		/// <summary>
-		/// Creates an instance of the <see cref="AndroidAccelerometerUncalibratedHandler" /> class.
-		/// </summary>
-		public AndroidAccelerometerUncalibratedHandler(Activity activity) : base(activity, SensorType.AccelerometerUncalibrated, 3) { }
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+	[SupportedOSPlatform("android26.0")]
+	public class AndroidAccelerometerUncalibratedHandler(Activity activity) : AndroidSensorHandler(activity, SensorType.AccelerometerUncalibrated, 3) {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension { Length = 1, Time = -2 },
 		};
 		/// <inheritdoc />
@@ -134,12 +128,8 @@ namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android game rotation vector sensor input.
 	/// </summary>
-	public class AndroidGameRotationVectorHandler : AndroidSensorHandler {
-		/// <summary>
-		/// Creates an instance of the <see cref="AndroidGameRotationVectorHandler" /> class.
-		/// </summary>
-		public AndroidGameRotationVectorHandler(Activity activity) : base(activity, SensorType.GameRotationVector, 4) { }
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+	public class AndroidGameRotationVectorHandler(Activity activity) : AndroidSensorHandler(activity, SensorType.GameRotationVector, 4) {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension(),
 		};
 		/// <inheritdoc />
@@ -148,12 +138,8 @@ namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android gravity sensor input.
 	/// </summary>
-	public class AndroidGravityHandler : AndroidSensorHandler {
-		/// <summary>
-		/// Creates an instance of the <see cref="AndroidGravityHandler" /> class.
-		/// </summary>
-		public AndroidGravityHandler(Activity activity) : base(activity, SensorType.Gravity, 3) { }
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+	public class AndroidGravityHandler(Activity activity) : AndroidSensorHandler(activity, SensorType.Gravity, 3) {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension { Length = 1, Time = -2 },
 		};
 		/// <inheritdoc />
@@ -162,12 +148,8 @@ namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android gyroscope sensor input.
 	/// </summary>
-	public class AndroidGyroscopeHandler : AndroidSensorHandler {
-		/// <summary>
-		/// Creates an instance of the <see cref="AndroidGyroscopeHandler" /> class.
-		/// </summary>
-		public AndroidGyroscopeHandler(Activity activity) : base(activity, SensorType.Gyroscope, 3) { }
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+	public class AndroidGyroscopeHandler(Activity activity) : AndroidSensorHandler(activity, SensorType.Gyroscope, 3) {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension { Time = -1 },
 		};
 		/// <inheritdoc />
@@ -176,12 +158,8 @@ namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android gyroscope (uncalibrated) sensor input.
 	/// </summary>
-	public class AndroidGyroscopeUncalibratedHandler : AndroidSensorHandler {
-		/// <summary>
-		/// Creates an instance of the <see cref="AndroidGyroscopeUncalibratedHandler" /> class.
-		/// </summary>
-		public AndroidGyroscopeUncalibratedHandler(Activity activity) : base(activity, SensorType.GyroscopeUncalibrated, 3) { }
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+	public class AndroidGyroscopeUncalibratedHandler(Activity activity) : AndroidSensorHandler(activity, SensorType.GyroscopeUncalibrated, 3) {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension { Time = -1 },
 		};
 		/// <inheritdoc />
@@ -190,12 +168,8 @@ namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android linear acceleration sensor input.
 	/// </summary>
-	public class AndroidLinearAccelerationHandler : AndroidSensorHandler {
-		/// <summary>
-		/// Creates an instance of the <see cref="AndroidLinearAccelerationHandler" /> class.
-		/// </summary>
-		public AndroidLinearAccelerationHandler(Activity activity) : base(activity, SensorType.LinearAcceleration, 3) { }
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+	public class AndroidLinearAccelerationHandler(Activity activity) : AndroidSensorHandler(activity, SensorType.LinearAcceleration, 3) {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension { Length = 1, Time = -2 },
 		};
 		/// <inheritdoc />
@@ -204,12 +178,8 @@ namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android magnetic field sensor input.
 	/// </summary>
-	public class AndroidMagneticFieldHandler : AndroidSensorHandler {
-		/// <summary>
-		/// Creates an instance of the <see cref="AndroidMagneticFieldHandler" /> class.
-		/// </summary>
-		public AndroidMagneticFieldHandler(Activity activity) : base(activity, SensorType.MagneticField, 3) { }
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+	public class AndroidMagneticFieldHandler(Activity activity) : AndroidSensorHandler(activity, SensorType.MagneticField, 3) {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension { Mass = 1, Time = -2, ElectricCurrent = -1 },
 		};
 		/// <inheritdoc />
@@ -218,12 +188,8 @@ namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android magnetic field (uncalibrated) sensor input.
 	/// </summary>
-	public class AndroidMagneticFieldUncalibratedHandler : AndroidSensorHandler {
-		/// <summary>
-		/// Creates an instance of the <see cref="AndroidMagneticFieldUncalibratedHandler" /> class.
-		/// </summary>
-		public AndroidMagneticFieldUncalibratedHandler(Activity activity) : base(activity, SensorType.MagneticFieldUncalibrated, 3) { }
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+	public class AndroidMagneticFieldUncalibratedHandler(Activity activity) : AndroidSensorHandler(activity, SensorType.MagneticFieldUncalibrated, 3) {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension { Mass = 1, Time = -2, ElectricCurrent = -1 },
 		};
 		/// <inheritdoc />
@@ -232,12 +198,8 @@ namespace Cryville.Input.Xamarin.Android {
 	/// <summary>
 	/// An <see cref="InputHandler" /> that handles Android rotation vector sensor input.
 	/// </summary>
-	public class AndroidRotationVectorHandler : AndroidSensorHandler {
-		/// <summary>
-		/// Creates an instance of the <see cref="AndroidRotationVectorHandler" /> class.
-		/// </summary>
-		public AndroidRotationVectorHandler(Activity activity) : base(activity, SensorType.RotationVector, 4) { }
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+	public class AndroidRotationVectorHandler(Activity activity) : AndroidSensorHandler(activity, SensorType.RotationVector, 4) {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension(),
 		};
 		/// <inheritdoc />

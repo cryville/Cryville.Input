@@ -1,4 +1,4 @@
-using Cryville.Common.Interop;
+using Cryville.Interop.Mono;
 using System;
 
 namespace Cryville.Input.Unity.Android {
@@ -41,7 +41,7 @@ namespace Cryville.Input.Unity.Android {
 
 		private protected override AndroidInputProxy_Callback Callback { get { return OnFeed; } }
 
-		[MonoPInvokeCallback]
+		[MonoPInvokeCallback(typeof(AndroidInputProxy_Callback))]
 		static void OnFeed(int id, int action, long time, float x, float y, float z, float w) {
 			try {
 				double timeSecs = time / 1000.0;

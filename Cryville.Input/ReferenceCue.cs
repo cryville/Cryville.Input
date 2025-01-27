@@ -108,7 +108,7 @@ namespace Cryville.Input {
 	/// <summary>
 	/// Physical dimension.
 	/// </summary>
-	public struct PhysicalDimension : IEquatable<PhysicalDimension> {
+	public record struct PhysicalDimension {
 		/// <summary>
 		/// The dimensions of time.
 		/// </summary>
@@ -138,22 +138,7 @@ namespace Cryville.Input {
 		/// </summary>
 		public int LuminousIntensity { get; set; }
 		/// <inheritdoc />
-		public bool Equals(PhysicalDimension other) =>
-			Time == other.Time &&
-			Length == other.Length &&
-			Mass == other.Mass &&
-			ElectricCurrent == other.ElectricCurrent &&
-			ThermodynamicTemperature == other.ThermodynamicTemperature &&
-			AmountOfSubstance == other.AmountOfSubstance &&
-			LuminousIntensity == other.LuminousIntensity;
-		/// <inheritdoc />
-		public override bool Equals(object obj) => obj is PhysicalDimension other && Equals(other);
-		/// <inheritdoc />
-		public override int GetHashCode() {
-			return Time | Length << 4 | Mass << 8 | ElectricCurrent << 12 | ThermodynamicTemperature << 16 | AmountOfSubstance << 20 | LuminousIntensity << 24;
-		}
-		/// <inheritdoc />
-		public override string ToString() {
+		public override readonly string ToString() {
 			if (Equals(default)) return "1";
 			var result = "";
 			DimensionToString(ref result, Time, 'T');
@@ -165,15 +150,11 @@ namespace Cryville.Input {
 			DimensionToString(ref result, LuminousIntensity, 'J');
 			return result;
 		}
-		void DimensionToString(ref string result, int dim, char sym) {
+		static void DimensionToString(ref string result, int dim, char sym) {
 			if (dim == 0) return;
-			if (result != "") result += "\xb7";
+			if (!string.IsNullOrEmpty(result)) result += "\xb7";
 			result += string.Format(CultureInfo.InvariantCulture, dim > 0 ? "{0}^{1}" : "{0}^({1})", sym, dim);
 		}
-		/// <inheritdoc />
-		public static bool operator ==(PhysicalDimension a, PhysicalDimension b) => a.Equals(b);
-		/// <inheritdoc />
-		public static bool operator !=(PhysicalDimension a, PhysicalDimension b) => !a.Equals(b);
 	}
 	/// <summary>
 	/// Relative unit.

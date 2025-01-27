@@ -1,11 +1,10 @@
 using Cryville.Common.Reflection;
-using System;
 
 namespace Cryville.Input {
 	/// <summary>
 	/// Input source.
 	/// </summary>
-	public struct InputSource : IEquatable<InputSource> {
+	public record struct InputSource {
 		/// <summary>
 		/// The input handler.
 		/// </summary>
@@ -18,29 +17,6 @@ namespace Cryville.Input {
 		/// </remarks>
 		public int Type { get; set; }
 		/// <inheritdoc />
-		public override bool Equals(object obj) {
-			if (obj == null || !(obj is InputSource)) return false;
-			return Equals((InputSource)obj);
-		}
-		/// <inheritdoc />
-		public bool Equals(InputSource other) {
-			return Handler == other.Handler && Type == other.Type;
-		}
-		/// <inheritdoc />
-		public override int GetHashCode() {
-			return Handler.GetHashCode() ^ Type;
-		}
-		/// <inheritdoc />
-		public override string ToString() {
-			return string.Format("{0}:{1}", TypeNameHelper.GetSimpleName(Handler.GetType()), Handler.GetTypeName(Type));
-		}
-		/// <inheritdoc />
-		public static bool operator ==(InputSource lhs, InputSource rhs) {
-			return lhs.Equals(rhs);
-		}
-		/// <inheritdoc />
-		public static bool operator !=(InputSource lhs, InputSource rhs) {
-			return !lhs.Equals(rhs);
-		}
+		public override readonly string ToString() => $"{TypeNameHelper.GetSimpleName(Handler.GetType())}:{Handler.GetTypeName(Type)}";
 	}
 }

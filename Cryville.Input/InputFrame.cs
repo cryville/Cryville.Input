@@ -2,7 +2,7 @@ namespace Cryville.Input {
 	/// <summary>
 	/// Input frame.
 	/// </summary>
-	public struct InputFrame {
+	public record struct InputFrame {
 		/// <summary>
 		/// The timestamp in seconds.
 		/// </summary>
@@ -39,9 +39,6 @@ namespace Cryville.Input {
 			Vector = vector;
 		}
 		/// <inheritdoc />
-		public override string ToString() {
-			if (IsNull) return string.Format("null@{0}", Time);
-			else return string.Format("{0}@{1}", Vector, Time);
-		}
+		public override readonly string ToString() => IsNull ? $"null@{Time}" : $"{Vector}@{Time}";
 	}
 }

@@ -33,7 +33,7 @@ namespace Cryville.Input.Unity {
 		}
 
 		/// <inheritdoc />
-		public override void Dispose(bool disposing) {
+		protected override void Dispose(bool disposing) {
 			if (disposing) {
 				Deactivate();
 			}

@@ -2,7 +2,7 @@ namespace Cryville.Input {
 	/// <summary>
 	/// Input event.
 	/// </summary>
-	public struct InputEvent {
+	public record struct InputEvent {
 		/// <summary>
 		/// The input identifier.
 		/// </summary>
@@ -16,8 +16,6 @@ namespace Cryville.Input {
 		/// </summary>
 		public InputFrame To { get; set; }
 		/// <inheritdoc />
-		public override string ToString() {
-			return string.Format("[{0}] {1} -> {2}", Identifier, From, To);
-		}
+		public override readonly string ToString() => $"[{Identifier}] {From} -> {To}";
 	}
 }

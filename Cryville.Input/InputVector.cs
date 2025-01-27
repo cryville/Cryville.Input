@@ -2,7 +2,7 @@ namespace Cryville.Input {
 	/// <summary>
 	/// Input vector.
 	/// </summary>
-	public struct InputVector {
+	public record struct InputVector {
 		/// <summary>
 		/// The first component of the vector.
 		/// </summary>
@@ -67,8 +67,6 @@ namespace Cryville.Input {
 			return new InputVector(-a.X, -a.Y, -a.Z, -a.W);
 		}
 		/// <inheritdoc />
-		public override string ToString() {
-			return string.Format("({0:G5}, {1:G5}, {2:G5}, {3:G5})", X, Y, Z, W);
-		}
+		public override readonly string ToString() => $"({X:G5}, {Y:G5}, {Z:G5}, {W:G5})";
 	}
 }

@@ -17,7 +17,7 @@ namespace Cryville.Input {
 	/// Input handler.
 	/// </summary>
 	public abstract class InputHandler : IDisposable {
-		InputFrameHandler m_onInput;
+		InputFrameHandler? m_onInput;
 		/// <summary>
 		/// Occurs when a new input frame is sent.
 		/// </summary>
@@ -37,7 +37,7 @@ namespace Cryville.Input {
 			}
 		}
 
-		InputBatchHandler m_onBatch;
+		InputBatchHandler? m_onBatch;
 		/// <summary>
 		/// Occurs when an input batch is finished sending.
 		/// </summary>
@@ -78,7 +78,7 @@ namespace Cryville.Input {
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 		/// </summary>
 		/// <param name="disposing">Whether disposing or finalizing.</param>
-		public abstract void Dispose(bool disposing);
+		protected abstract void Dispose(bool disposing);
 		/// <summary>
 		/// Whether null input frames may be sent by the input handler.
 		/// </summary>

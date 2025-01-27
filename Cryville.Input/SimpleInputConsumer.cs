@@ -5,16 +5,12 @@ namespace Cryville.Input {
 	/// <summary>
 	/// A simple input consumer that receives input frames.
 	/// </summary>
-	public class SimpleInputConsumer {
-		readonly InputManager _manager;
-		readonly object _lock = new object();
-		readonly Dictionary<InputIdentifier, InputFrame> _frames = new Dictionary<InputIdentifier, InputFrame>();
-		readonly List<InputEvent> _events = new List<InputEvent>();
-		/// <summary>
-		/// Creates an instance of the <see cref="SimpleInputConsumer" /> class.
-		/// </summary>
-		/// <param name="manager">The input manager.</param>
-		public SimpleInputConsumer(InputManager manager) { _manager = manager; }
+	/// <param name="manager">The input manager.</param>
+	public class SimpleInputConsumer(InputManager manager) {
+		readonly object _lock = new();
+		readonly Dictionary<InputIdentifier, InputFrame> _frames = [];
+		readonly List<InputEvent> _events = [];
+
 		/// <summary>
 		/// Activates all the input handlers.
 		/// </summary>
@@ -22,13 +18,13 @@ namespace Cryville.Input {
 			lock (_lock) {
 				_events.Clear();
 			}
-			_manager.EnumerateHandlers(h => h.OnInput += OnInput);
+			manager.EnumerateHandlers(h => h.OnInput += OnInput);
 		}
 		/// <summary>
 		/// Deactivates all the input handlers.
 		/// </summary>
 		public void Deactivate() {
-			_manager.EnumerateHandlers(h => h.OnInput -= OnInput);
+			manager.EnumerateHandlers(h => h.OnInput -= OnInput);
 		}
 		/// <summary>
 		/// Called when a new input frame is received.
@@ -61,6 +57,8 @@ namespace Cryville.Input {
 		/// </summary>
 		/// <param name="cb">The callback function.</param>
 		public void EnumerateEvents(Action<InputEvent> cb) {
+			if (cb is null) throw new ArgumentNullException(nameof(cb));
+
 			lock (_lock) {
 				foreach (var ev in _events) cb(ev);
 				_events.Clear();
@@ -71,6 +69,8 @@ namespace Cryville.Input {
 		/// </summary>
 		/// <param name="cb">The callback function.</param>
 		public void EnumerateActiveIdentifiers(Action<InputIdentifier, InputFrame> cb) {
+			if (cb is null) throw new ArgumentNullException(nameof(cb));
+
 			lock (_lock) {
 				foreach (var vec in _frames) cb(vec.Key, vec.Value);
 			}

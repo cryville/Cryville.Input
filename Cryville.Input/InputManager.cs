@@ -11,9 +11,9 @@ namespace Cryville.Input {
 		/// <summary>
 		/// A map of handler types to lists of parameters to be initialized.
 		/// </summary>
-		public static readonly Dictionary<Type, object[]> HandlerRegistries = new Dictionary<Type, object[]>();
-		readonly HashSet<InputHandler> _handlers = new HashSet<InputHandler>();
-		readonly Dictionary<Type, InputHandler> _typeMap = new Dictionary<Type, InputHandler>();
+		public static readonly Dictionary<Type, object[]> HandlerRegistries = [];
+		readonly HashSet<InputHandler> _handlers = [];
+		readonly Dictionary<Type, InputHandler> _typeMap = [];
 		/// <summary>
 		/// Creates an instance of the <see cref="InputManager" /> class and tries to initialize all the handlers with their corresponding parameters in <see cref="HandlerRegistries" />.
 		/// </summary>
@@ -39,7 +39,7 @@ namespace Cryville.Input {
 		/// </summary>
 		/// <param name="typeName">The type name.</param>
 		/// <returns>The handler with the specified type name. <see langword="null" /> if not found or not initialized.</returns>
-		public InputHandler GetHandlerByTypeName(string typeName) {
+		public InputHandler? GetHandlerByTypeName(string typeName) {
 			var type = Type.GetType(typeName);
 			if (type == null) return null;
 			_typeMap.TryGetValue(type, out InputHandler result);
@@ -50,6 +50,8 @@ namespace Cryville.Input {
 		/// </summary>
 		/// <param name="cb">The callback function.</param>
 		public void EnumerateHandlers(Action<InputHandler> cb) {
+			if (cb is null) throw new ArgumentNullException(nameof(cb));
+
 			foreach (var h in _handlers) cb(h);
 		}
 	}

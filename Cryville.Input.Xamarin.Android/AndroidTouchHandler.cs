@@ -13,7 +13,7 @@ namespace Cryville.Input.Xamarin.Android {
 		/// Creates an instance of the <see cref="AndroidTouchHandler" /> class.
 		/// </summary>
 		public AndroidTouchHandler(View view) {
-			if (view == null) throw new ArgumentNullException(nameof(view));
+			ArgumentNullException.ThrowIfNull(view);
 			_listener = new InternalListener(view, this);
 		}
 
@@ -28,9 +28,10 @@ namespace Cryville.Input.Xamarin.Android {
 		}
 
 		/// <inheritdoc />
-		public override void Dispose(bool disposing) {
+		protected override void Dispose(bool disposing) {
 			if (disposing) {
 				Deactivate();
+				_listener.Dispose();
 			}
 		}
 
@@ -40,7 +41,7 @@ namespace Cryville.Input.Xamarin.Android {
 		/// <inheritdoc />
 		public override byte Dimension => 2;
 
-		static readonly ReferenceCue _refCue = new ReferenceCue {
+		static readonly ReferenceCue _refCue = new() {
 			PhysicalDimension = new PhysicalDimension { Length = 1 },
 			RelativeUnit = RelativeUnit.Pixel,
 			Flags = ReferenceFlag.FlipY,
@@ -60,7 +61,7 @@ namespace Cryville.Input.Xamarin.Android {
 			return SystemClock.UptimeMillis() / 1000.0;
 		}
 
-		class InternalListener : Java.Lang.Object, View.IOnTouchListener {
+		sealed class InternalListener : Java.Lang.Object, View.IOnTouchListener {
 			readonly AndroidTouchHandler _handler;
 			public bool _activated;
 

@@ -70,7 +70,7 @@ namespace Cryville.Input.Unity.Android {
 		}
 
 		/// <inheritdoc />
-		public override void Dispose(bool disposing) {
+		protected override void Dispose(bool disposing) {
 			if (disposing) {
 				Deactivate();
 				AndroidJNI.DeleteGlobalRef(_i_T);
