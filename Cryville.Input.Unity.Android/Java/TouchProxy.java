@@ -4,14 +4,25 @@ import android.view.MotionEvent;
 import android.view.View;
 import com.unity3d.player.UnityPlayer;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import world.cryville.input.unity.android.Proxy;
 
 public final class TouchProxy extends Proxy implements View.OnTouchListener {
-	public TouchProxy() throws NoSuchFieldException, IllegalAccessException, SecurityException {
+	public TouchProxy() throws NoSuchFieldException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, SecurityException {
 		Field playerField = activity.getClass().getDeclaredField("mUnityPlayer");
 		playerField.setAccessible(true);
 		UnityPlayer player = (UnityPlayer)playerField.get(activity);
-		player.setOnTouchListener(this);
+		if (View.class.isInstance(player)) {
+			// Before Unity 6
+			((View)(Object)player).setOnTouchListener(this);
+		}
+		else {
+			// Unity 6 or later
+			Method getSurfaceViewMethod = player.getClass().getMethod("getSurfaceView");
+			View view = (View)getSurfaceViewMethod.invoke(player);
+			view.setOnTouchListener(this);
+		}
 	}
 
 	boolean activated;

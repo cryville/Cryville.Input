@@ -1,17 +1,17 @@
 package world.cryville.input.unity.android;
 
+import android.app.Activity;
 import com.unity3d.player.UnityPlayer;
-import com.unity3d.player.UnityPlayerActivity;
 import world.cryville.input.unity.android.NativeMethods;
 
 public abstract class Proxy {
-	protected static UnityPlayerActivity activity;
+	protected static Activity activity;
 	
 	static int _count;
 	int _id;
 
 	public Proxy() {
-		if (activity == null) activity = (UnityPlayerActivity)UnityPlayer.currentActivity;
+		if (activity == null) activity = UnityPlayer.currentActivity;
 		_id = _count++;
 	}
 
